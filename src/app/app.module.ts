@@ -6,20 +6,40 @@ import { AppComponent } from './app.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GoogleChartsModule } from 'angular-google-charts';
-
+import { NavbarComponent } from './navbar/navbar.component';
+import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
+import { GoogleLoginProvider, FacebookLoginProvider } from "angularx-social-login";
+import { HttpClientModule } from '@angular/common/http';
+let config = new AuthServiceConfig([
+  {
+    id: GoogleLoginProvider.PROVIDER_ID,
+    provider: new GoogleLoginProvider("408991681716-1g379ntlgvkvnr9a88o4l6fkq82actsq.apps.googleusercontent.com")
+  }
+]);
+export function provideConfig() {
+  return config;
+}
 @NgModule({
   declarations: [
     AppComponent,
-    HomepageComponent
+    HomepageComponent,
+    NavbarComponent
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatTableModule,
-    GoogleChartsModule
+    GoogleChartsModule,
+    SocialLoginModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: AuthServiceConfig,
+      useFactory: provideConfig
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
