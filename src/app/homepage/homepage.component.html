@@ -18,8 +18,17 @@
           <div class="example-element-weight"> {{element.weight}} </div>
         </div>
         <div class="example-element-description">
-          {{element.description}}
-          <span class="example-element-description-attribution"> -- Wikipedia </span>
+            <google-chart 
+            [title]="title"
+               [type]="type"
+               [data]="data"
+               [width]="width"
+               [height]="height"
+               [options]="options"
+               [columns]="columnNames"
+               >
+               
+            </google-chart>
         </div>
       </div>
     </td>
@@ -33,17 +42,7 @@
   </tr>
   <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
 </table>
-<google-chart 
-[title]="title"
-   [type]="type"
-   [data]="data"
-   [width]="width"
-   [height]="height"
-   [options]="options"
-   [columns]="columnNames"
-   >
-   
-</google-chart>
+
 
 <!-- 
 

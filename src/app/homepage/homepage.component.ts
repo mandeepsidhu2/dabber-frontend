@@ -38,8 +38,8 @@ export class HomepageComponent implements OnInit {
          title: 'Temperature'
       },
    };
-   width = 550;
-   height = 400;
+   width = 700;
+   height = 300;
 
   dataSource = ELEMENT_DATA;
   columnsToDisplay = ['name', 'easy', 'medium', 'hard'];
