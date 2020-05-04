@@ -7,16 +7,10 @@
     <div class="collapse navbar-collapse" id="navbarsExampleDefault" [ngbCollapse]="isCollapsed">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Settings</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Profile</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Help</a>
+        <li class="nav-item active">
+          <a class="nav-link" (click)="increaseEasy()">Easy^ <span class="sr-only">(current)</span></a>
         </li>
       </ul>
     
@@ -40,23 +34,4 @@
     </div>
   </nav>
 
-  <!-- 
-    <div *ngIf=!loggedIn class="form-inline my-2 my-lg-0">
-    <ul  class=" navbar-nav mr-auto">
-        <li  class="nav-item">
-            <fa-icon class="fa-2x" (click)="signInWithGoogle()" [icon]="faGoogle"></fa-icon>
-        </li> 
-    </ul>
-</div>
-
-<div *ngIf=loggedIn class="form-inline my-2 my-lg-0">
-    <ul  class="nav navbar-nav mr-auto">
-        <li class="nav-item" >
-          <h3>{{user.name}}</h3>
-        </li>
-        <li  class="nav-item" >
-                <button type="button" (click)="signOut()" class="btn btn-outline-danger">Logout</button>                
-        </li> 
-  </ul>
-</div> 
--->
+<app-homepage></app-homepage>

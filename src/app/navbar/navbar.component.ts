@@ -4,7 +4,7 @@ import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-logi
 import { SocialUser } from "angularx-social-login";
 import {AuthenticationService} from "../authentication.service"
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
-
+import {LevelService} from '../level.service'
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -15,7 +15,7 @@ export class NavbarComponent implements OnInit {
    loggedIn: boolean;
    faGoogle=faGoogle;
    public isCollapsed = true;
-  constructor(private authenticationService:AuthenticationService,private socialAuthService: AuthService,private authService: AuthService) { }
+  constructor(private levelService:LevelService,private authenticationService:AuthenticationService,private socialAuthService: AuthService,private authService: AuthService) { }
 
   ngOnInit(): void {
     this.authService.authState.subscribe((user) => {
@@ -38,5 +38,10 @@ export class NavbarComponent implements OnInit {
     this.authService.signOut();
     this.authenticationService.logout();
     
+  }
+  increaseEasy(){
+    this.levelService.increaseLevel().subscribe(data=>{
+      console.log(data);
+    })
   }
 }
