@@ -32,6 +32,7 @@
     "angular-material": "^1.1.21",
     "angularx-social-login": "^2.3.1",
     "bootstrap": "^4.4.1",
+    "bootstrap-directional-buttons": "^1.0.1",
     "jquery": "^3.5.0",
     "ngx-cookie-service": "^3.0.4",
     "popper.js": "^1.16.1",

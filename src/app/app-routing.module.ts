@@ -5,8 +5,13 @@ import { NavbarComponent } from './navbar/navbar.component';
 
 
 const routes: Routes = [{
+  path: '',
+  component: NavbarComponent,
+children:[
+{
   path: 'home',
-  component: NavbarComponent
+  component: HomepageComponent
+}]
 }];
 
 @NgModule({
