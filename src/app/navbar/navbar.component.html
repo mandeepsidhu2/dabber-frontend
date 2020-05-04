@@ -1,10 +1,62 @@
-<p>navbar works!</p>
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <a class="navbar-brand" >Tabber</a>
+    <button class="navbar-toggler d-lg-none" type="button" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed" aria-controls="navbarsExampleDefault" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault" [ngbCollapse]="isCollapsed">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Settings</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Profile</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Help</a>
+        </li>
+      </ul>
+    
+      <div  class="mt-2 mt-md-0">
+        <ul *ngIf=!loggedIn class=" navbar-nav mr-auto">
+          <li  class="nav-item">
+              <fa-icon style="color: white"class="fa-2x" (click)="signInWithGoogle()" [icon]="faGoogle"></fa-icon>
+          </li> 
+        </ul>
+      </div>
+      <div *ngIf=loggedIn class="mt-2 mt-md-0">
+        <ul  class="nav navbar-nav mr-auto">
+          <li class="nav-item" >
+            <h2 style="color: white; margin-right: 2em">{{user.name}}</h2>
+          </li>
+          <li  class="nav-item" >
+                  <button type="button" (click)="signOut()" class="btn btn-outline-danger">Logout</button>                
+          </li> 
+        </ul>
+      </div>
+    </div>
+  </nav>
 
-    <button (click)="signInWithGoogle()" >login</button>
+  <!-- 
+    <div *ngIf=!loggedIn class="form-inline my-2 my-lg-0">
+    <ul  class=" navbar-nav mr-auto">
+        <li  class="nav-item">
+            <fa-icon class="fa-2x" (click)="signInWithGoogle()" [icon]="faGoogle"></fa-icon>
+        </li> 
+    </ul>
+</div>
 
-<!-- <img src="{{ user.photoUrl }}">
-<div>
-  <h4>{{ user.name }}</h4>
-  <p>{{ user.email }}</p>
-</div> -->
-<app-homepage></app-homepage>
+<div *ngIf=loggedIn class="form-inline my-2 my-lg-0">
+    <ul  class="nav navbar-nav mr-auto">
+        <li class="nav-item" >
+          <h3>{{user.name}}</h3>
+        </li>
+        <li  class="nav-item" >
+                <button type="button" (click)="signOut()" class="btn btn-outline-danger">Logout</button>                
+        </li> 
+  </ul>
+</div> 
+-->

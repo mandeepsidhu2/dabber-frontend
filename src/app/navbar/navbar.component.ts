@@ -3,15 +3,18 @@ import { AuthService } from "angularx-social-login";
 import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
 import { SocialUser } from "angularx-social-login";
 import {AuthenticationService} from "../authentication.service"
+import { faGoogle } from '@fortawesome/free-brands-svg-icons';
+
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  private user: SocialUser;
-  private loggedIn: boolean;
- 
+   user: SocialUser;
+   loggedIn: boolean;
+   faGoogle=faGoogle;
+   public isCollapsed = true;
   constructor(private authenticationService:AuthenticationService,private socialAuthService: AuthService,private authService: AuthService) { }
 
   ngOnInit(): void {
@@ -33,5 +36,7 @@ export class NavbarComponent implements OnInit {
 }
   signOut(): void {
     this.authService.signOut();
+    this.authenticationService.logout();
+    
   }
 }

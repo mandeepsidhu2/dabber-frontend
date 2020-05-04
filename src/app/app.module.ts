@@ -10,6 +10,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
 import { GoogleLoginProvider, FacebookLoginProvider } from "angularx-social-login";
 import { HttpClientModule } from '@angular/common/http';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 let config = new AuthServiceConfig([
   {
     id: GoogleLoginProvider.PROVIDER_ID,
@@ -32,7 +34,9 @@ export function provideConfig() {
     BrowserAnimationsModule,
     MatTableModule,
     GoogleChartsModule,
-    SocialLoginModule
+    SocialLoginModule,
+    FontAwesomeModule,
+    NgbModule
   ],
   providers: [
     {
