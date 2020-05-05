@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import {animate, state, style, transition, trigger} from '@angular/animations';
 @Component({
   selector: 'app-homepage',
@@ -13,6 +14,7 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
   ],
 })
 export class HomepageComponent implements OnInit {
+  public now: Date = new Date();
   title = 'Average Temperatures of Cities';
    type = 'LineChart';
    data = [
@@ -44,7 +46,11 @@ export class HomepageComponent implements OnInit {
   dataSource = ELEMENT_DATA;
   columnsToDisplay = ['name', 'easy', 'medium', 'hard'];
   expandedElement: PeriodicElement | null;
-  constructor() { }
+  constructor() { 
+    setInterval(() => {
+      this.now = new Date();
+    }, 1);
+  }
 
   ngOnInit(): void {
   }

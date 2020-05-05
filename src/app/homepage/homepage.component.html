@@ -1,17 +1,27 @@
 <div style="margin-top: 80px;">
   <div class="button-container" style="margin-bottom: 30px">
+      <div class="toggle">
+          <h1 style="font-weight:bold;margin-bottom: 10px;">Easy</h1>
+          <button type="button" class="btn btn-outline-success ">+</button>
+          <h1 >3</h1>
+          <button type="button" class="btn btn-outline-danger ">-</button>
+        </div>
+      <div class="toggle">
+          <h1 style="font-weight:bold;margin-bottom: 10px;">Medium</h1>
+          <button type="button" class="btn btn-outline-success ">+</button>
+          <h1 >6</h1>
+          <button type="button" class="btn btn-outline-danger ">-</button>
+      </div>
+      <div class="toggle">
+          <h1 style="font-weight:bold;margin-bottom: 10px;">Hard</h1>
+          <button type="button" class="btn btn-outline-success ">+</button>
+          <h1 >2</h1>
+          <button type="button" class="btn btn-outline-danger ">-</button>
+      </div>
+  <div class="break"></div> 
   <div class="toggle">
-    <button type="button" class="btn btn-primary btn-arrow-left">Left Arrow Button</button>
-    <button type="button" class="btn btn-primary btn-arrow-left">Left Arrow Button</button>
-  </div>
-  <div class="toggle">
-    <button type="button" class="btn btn-primary btn-arrow-left">Left Arrow Button</button>
-    <button type="button" class="btn btn-primary btn-arrow-left">Left Arrow Button</button>
-  </div>
-  <div class="toggle">
-    <button type="button" class="btn btn-primary btn-arrow-left">Left Arrow Button</button>
-    <button type="button" class="btn btn-primary btn-arrow-left">Left Arrow Button</button>
-  </div>
+  <h1 style="font-size:50px">{{now |date :"H:mm:ss"}}</h1>
+</div>
   </div>
   <table mat-table 
        [dataSource]="dataSource" multiTemplateDataRows
