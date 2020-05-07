@@ -1,5 +1,5 @@
 <div style="margin-top: 80px;">
-  <div class="button-container" style="margin-bottom: 30px">
+  <div *ngIf=loggedIn class="button-container" style="margin-bottom: 30px">
       <div class="toggle">
           <h1 style="font-weight:bold;margin-bottom: 10px;">Easy</h1>
           <button (click)="increaseLevels('easy')" type="button" class="btn btn-outline-success ">+</button>
@@ -18,10 +18,11 @@
           <h1 >{{userData?.difficult}}</h1>
           <button (click)="decreaseLevels('difficult')"  type="button" class="btn btn-outline-danger ">-</button>
       </div>
-  <div class="break"></div> 
-  <div class="toggle">
-  <h1 style="font-size:50px">{{now |date :"H:mm:ss"}}</h1>
-</div>
+      <div class="break"></div> 
+      <div class="toggle">
+        <h1 style="font-size:50px; margin-top: 15%">{{now |date :"H:mm:ss"}}</h1>
+        <h1 style="font-size:40px; margin-top: 10%">{{now |date :"d MMM y"}}</h1>
+      </div>
   </div>
   <table mat-table 
        [dataSource]="dataSource" multiTemplateDataRows

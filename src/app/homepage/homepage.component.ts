@@ -17,10 +17,17 @@ import { LevelService } from '../level.service';
 export class HomepageComponent implements OnInit {
   public now: Date = new Date();
   userData:any;
+  loggedIn:Boolean=false
   ngOnInit(): void {
     this.levelService.getUserData().subscribe(data=>{
       this.userData=data["user"];
-      console.log(this.userData["email"])
+      console.log(localStorage.getItem(btoa("loggedIn")))
+      if(localStorage.getItem(btoa("loggedIn"))==btoa("true"))
+      this.loggedIn=true;
+      else
+      this.loggedIn=false;
+
+     
     })
   }
   constructor(private levelService:LevelService) { 

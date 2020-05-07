@@ -21,6 +21,7 @@ export class NavbarComponent implements OnInit {
     this.authService.authState.subscribe((user) => {
       this.user = user;
       this.loggedIn = (user != null);
+      localStorage.setItem(btoa("loggedIn"),btoa(String(this.loggedIn)))
     });
   }
   signInWithGoogle(): void {
@@ -30,6 +31,9 @@ export class NavbarComponent implements OnInit {
         this.authenticationService.login(userData.idToken).subscribe(data=>{
          console.log(data);
          this.loggedIn=true
+         localStorage.setItem(btoa("loggedIn"),btoa("true"))
+         window.location.reload();
+              
        });
   })
   
@@ -37,7 +41,8 @@ export class NavbarComponent implements OnInit {
   signOut(): void {
     this.authService.signOut();
     this.authenticationService.logout();
-    
+    localStorage.setItem(btoa("loggedIn"),btoa("false"))
+    window.location.reload();
   }
   // increaseEasy(){
   //   this.levelService.increaseLevel("easy",4).subscribe(data=>{
