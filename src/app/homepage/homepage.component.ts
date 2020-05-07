@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import {animate, state, style, transition, trigger} from '@angular/animations';
+import { LevelService } from '../level.service';
 @Component({
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',
@@ -15,6 +16,32 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 })
 export class HomepageComponent implements OnInit {
   public now: Date = new Date();
+  userData:any;
+  ngOnInit(): void {
+    this.levelService.getUserData().subscribe(data=>{
+      this.userData=data["user"];
+      console.log(this.userData["email"])
+    })
+  }
+  constructor(private levelService:LevelService) { 
+    setInterval(() => {
+      this.now = new Date();
+    }, 1);
+  }
+  increaseLevels( level:string){
+    this.userData[level]=this.userData[level]+1
+    this.levelService.changeLevel(level,this.userData[level]).subscribe(data=>{
+      console.log(data);
+    })
+  }
+  decreaseLevels(level:string){
+    if(this.userData[level]>0){
+    this.userData[level]=this.userData[level]-1
+    }
+    this.levelService.changeLevel(level,this.userData[level]).subscribe(data=>{
+      console.log(data);
+    })
+  }
   title = 'Average Temperatures of Cities';
    type = 'LineChart';
    data = [
@@ -46,14 +73,10 @@ export class HomepageComponent implements OnInit {
   dataSource = ELEMENT_DATA;
   columnsToDisplay = ['name', 'easy', 'medium', 'hard'];
   expandedElement: PeriodicElement | null;
-  constructor() { 
-    setInterval(() => {
-      this.now = new Date();
-    }, 1);
-  }
-
-  ngOnInit(): void {
-  }
+ 
+ 
+ 
+ 
   
 }
 

@@ -2,21 +2,21 @@
   <div class="button-container" style="margin-bottom: 30px">
       <div class="toggle">
           <h1 style="font-weight:bold;margin-bottom: 10px;">Easy</h1>
-          <button type="button" class="btn btn-outline-success ">+</button>
-          <h1 >3</h1>
-          <button type="button" class="btn btn-outline-danger ">-</button>
+          <button (click)="increaseLevels('easy')" type="button" class="btn btn-outline-success ">+</button>
+          <h1 >{{userData?.easy}}</h1>
+          <button (click)="decreaseLevels('easy')" type="button" class="btn btn-outline-danger ">-</button>
         </div>
       <div class="toggle">
           <h1 style="font-weight:bold;margin-bottom: 10px;">Medium</h1>
-          <button type="button" class="btn btn-outline-success ">+</button>
-          <h1 >6</h1>
-          <button type="button" class="btn btn-outline-danger ">-</button>
+          <button (click)="increaseLevels('medium')" type="button" class="btn btn-outline-success ">+</button>
+          <h1 >{{userData?.medium}}</h1>
+          <button (click)="decreaseLevels('medium')" type="button" class="btn btn-outline-danger ">-</button>
       </div>
       <div class="toggle">
           <h1 style="font-weight:bold;margin-bottom: 10px;">Hard</h1>
-          <button type="button" class="btn btn-outline-success ">+</button>
-          <h1 >2</h1>
-          <button type="button" class="btn btn-outline-danger ">-</button>
+          <button (click)="increaseLevels('difficult')" type="button" class="btn btn-outline-success ">+</button>
+          <h1 >{{userData?.difficult}}</h1>
+          <button (click)="decreaseLevels('difficult')"  type="button" class="btn btn-outline-danger ">-</button>
       </div>
   <div class="break"></div> 
   <div class="toggle">

@@ -39,9 +39,9 @@ export class NavbarComponent implements OnInit {
     this.authenticationService.logout();
     
   }
-  increaseEasy(){
-    this.levelService.increaseLevel().subscribe(data=>{
-      console.log(data);
-    })
-  }
+  // increaseEasy(){
+  //   this.levelService.increaseLevel("easy",4).subscribe(data=>{
+  //     console.log(data);
+  //   })
+  // }
 }
