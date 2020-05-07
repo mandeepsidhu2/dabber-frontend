@@ -12,11 +12,10 @@ import { GoogleLoginProvider, FacebookLoginProvider } from "angularx-social-logi
 import { HttpClientModule } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
 let config = new AuthServiceConfig([
   {
     id: GoogleLoginProvider.PROVIDER_ID,
-    provider: new GoogleLoginProvider("408991681716-1g379ntlgvkvnr9a88o4l6fkq82actsq.apps.googleusercontent.com")
+    provider: new GoogleLoginProvider("148434873376-a1k8ubdj3g3oqkh53an00v8angbj2itd.apps.googleusercontent.com")
   }
 ]);
 export function provideConfig() {
