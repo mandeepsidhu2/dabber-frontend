@@ -13,12 +13,16 @@
 
 .button-container{
   display: flex;
-  
+  width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
   justify-content: space-around;
 }
 
 table {
-    width: 100%;
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
   }
   
   tr.example-detail-row {
@@ -40,15 +44,6 @@ table {
   .example-element-detail {
     overflow: hidden;
     display: flex;
-  }
-  
-  .example-element-diagram {
-    min-width: 80px;
-    border: 2px solid black;
-    padding: 8px;
-    font-weight: lighter;
-    margin: 8px 0;
-    height: 104px;
   }
   
   .example-element-symbol {

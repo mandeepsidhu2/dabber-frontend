@@ -18,24 +18,51 @@ export class HomepageComponent implements OnInit {
   public now: Date = new Date();
   userData:any;
   loggedIn:Boolean=false
+  
+  var:Array<any>;
+  ELEMENT_DATA:totalRecord[]=[]
+  dataSource:any;
+  columnsToDisplay = ['name', 'easy', 'medium', 'hard'];
+  expandedElement: totalRecord | null;
+  
   ngOnInit(): void {
+    
     this.levelService.getUserData().subscribe(data=>{
       this.userData=data["user"];
-      console.log(localStorage.getItem(btoa("loggedIn")))
       if(localStorage.getItem(btoa("loggedIn"))==btoa("true"))
       this.loggedIn=true;
       else
-      this.loggedIn=false;
-
-     
+      this.loggedIn=false;  
     })
+  
+    this.levelService.getAllData().subscribe(data=>{
+      this.fillData(data)
+    
+    })
+  }
+  fillData(data:any){
+      this.var=data
+      
+      console.log(data)
+      for(let i=0;i<this.var.length;i++){
+        var temp:totalRecord= {name:null,easy:null,medium:null,hard:null};
+        temp.name=this.var[i]['name'];
+       temp.easy=this.var[i]['totalEasy'];
+        temp.medium=this.var[i]['totalMedium'];
+        temp.hard=this.var[i]['totalDifficult'];
+       this.ELEMENT_DATA.push(temp)
+     }
+     this.dataSource=this.ELEMENT_DATA;
+      console.log(this.dataSource);
   }
   constructor(private levelService:LevelService) { 
     setInterval(() => {
       this.now = new Date();
+      
     }, 1);
   }
   increaseLevels( level:string){
+    
     this.userData[level]=this.userData[level]+1
     this.levelService.changeLevel(level,this.userData[level]).subscribe(data=>{
       console.log(data);
@@ -77,102 +104,77 @@ export class HomepageComponent implements OnInit {
    width = 700;
    height = 300;
 
-  dataSource = ELEMENT_DATA;
-  columnsToDisplay = ['name', 'easy', 'medium', 'hard'];
-  expandedElement: PeriodicElement | null;
- 
- 
+  
  
  
   
 }
 
-export interface PeriodicElement {
+export interface totalRecord {
   name: string;
   hard: number;
   easy: number;
   medium: number;
-  description: string;
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  {
-    hard: 1,
-    name: 'Hydrogen',
-    easy: 1.0079,
-    medium: 2,
-    description: `Hydrogen is a chemical element with medium H and atomic number 1. With a standard
-        atomic easy of 1.008, hydrogen is the lightest element on the periodic table.`
-  }, {
-    hard: 2,
-    name: 'Helium',
-    easy: 4.0026,
-    medium: 4,
-    description: `Helium is a chemical element with medium He and atomic number 2. It is a
-        colorless, odorless, tasteless, non-toxic, inert, monatomic gas, the first in the noble gas
-        group in the periodic table. Its boiling point is the lowest among all the elements.`
-  }, {
-    hard: 3,
-    name: 'Lithium',
-    easy: 6.941,
-    medium: 5,
-    description: `Lithium is a chemical element with medium Li and atomic number 3. It is a soft,
-        silvery-white alkali metal. Under standard conditions, it is the lightest metal and the
-        lightest solid element.`
-  }, {
-    hard: 4,
-    name: 'Beryllium',
-    easy: 9.0122,
-    medium: 6,
-    description: `Beryllium is a chemical element with medium Be and atomic number 4. It is a
-        relatively rare element in the universe, usually occurring as a product of the spallation of
-        larger atomic nuclei that have collided with cosmic rays.`
-  }, {
-    hard: 5,
-    name: 'Boron',
-    easy: 10.811,
-    medium: 2,
-    description: `Boron is a chemical element with medium B and atomic number 5. Produced entirely
-        by cosmic ray spallation and supernovae and not by stellar nucleosynthesis, it is a
-        low-abundance element in the Solar system and in the Earth's crust.`
-  }, {
-    hard: 6,
-    name: 'Carbon',
-    easy: 12.0107,
-    medium: 9,
-    description: `Carbon is a chemical element with medium C and atomic number 6. It is nonmetallic
-        and tetravalent—making four electrons available to form covalent chemical bonds. It belongs
-        to group 14 of the periodic table.`
-  }, {
-    hard: 7,
-    name: 'Nitrogen',
-    easy: 14.0067,
-    medium: 1,
-    description: `Nitrogen is a chemical element with medium N and atomic number 7. It was first
-        discovered and isolated by Scottish physician Daniel Rutherford in 1772.`
-  }, {
-    hard: 8,
-    name: 'Oxygen',
-    easy: 15.9994,
-    medium: 4,
-    description: `Oxygen is a chemical element with medium O and atomic number 8. It is a member of
-         the chalcogen group on the periodic table, a highly reactive nonmetal, and an oxidizing
-         agent that readily forms oxides with most elements as well as with other compounds.`
-  }, {
-    hard: 9,
-    name: 'Fluorine',
-    easy: 18.9984,
-    medium: 6,
-    description: `Fluorine is a chemical element with medium F and atomic number 9. It is the
-        lightest halogen and exists as a highly toxic pale yellow diatomic gas at standard
-        conditions.`
-  }, {
-    hard: 10,
-    name: 'Neon',
-    easy: 20.1797,
-    medium: 9,
-    description: `Neon is a chemical element with medium Ne and atomic number 10. It is a noble gas.
-        Neon is a colorless, odorless, inert monatomic gas under standard conditions, with about
-        two-thirds the density of air.`
-  },
-];
+// const ELEMENT_DATA: PeriodicElement[] = [
+//   {
+//     hard: 1,
+//     name: 'Hydrogen',
+//     easy: 1.0079,
+//     medium: 2
+   
+//   }, {
+//     hard: 2,
+//     name: 'Helium',
+//     easy: 4.0026,
+//     medium: 4,
+//   }, {
+//     hard: 3,
+//     name: 'Lithium',
+//     easy: 6.941,
+//     medium: 5,
+  
+//   }, {
+//     hard: 4,
+//     name: 'Beryllium',
+//     easy: 9.0122,
+//     medium: 6,
+//   }, {
+//     hard: 5,
+//     name: 'Boron',
+//     easy: 10.811,
+//     medium: 2,
+   
+//   }, {
+//     hard: 6,
+//     name: 'Carbon',
+//     easy: 12.0107,
+//     medium: 9,
+  
+//   }, {
+//     hard: 7,
+//     name: 'Nitrogen',
+//     easy: 14.0067,
+//     medium: 1,
+
+//   }, {
+//     hard: 8,
+//     name: 'Oxygen',
+//     easy: 15.9994,
+//     medium: 4,
+  
+//   }, {
+//     hard: 9,
+//     name: 'Fluorine',
+//     easy: 18.9984,
+//     medium: 6,
+   
+//   }, {
+//     hard: 10,
+//     name: 'Neon',
+//     easy: 20.1797,
+//     medium: 9,
+   
+//   },
+// ];

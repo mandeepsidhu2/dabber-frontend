@@ -14,6 +14,12 @@ export class LevelService {
   constructor(private http: HttpClient,private cookieService: CookieService) { }
   endpoint=""
   ob:any={}
+  getAllData():Observable<any>{
+    this.endpoint=this.baseUrl+'/api/v1/all';
+    let headers=new HttpHeaders().set('token',atob(this.cookieService.get('token')));
+    headers.set('Content-Type','application/json').set('Accept','application/json');
+    return this.http.get<any>(this.endpoint,{headers});
+  }
   getUserData():Observable<any>{
     this.endpoint=this.baseUrl+'/api/v1/fetch';
     let headers=new HttpHeaders().set('token',atob(this.cookieService.get('token')));
