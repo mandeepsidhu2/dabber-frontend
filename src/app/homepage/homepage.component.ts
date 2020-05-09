@@ -21,7 +21,7 @@ export class HomepageComponent implements OnInit {
   
   var:Array<any>;
   ELEMENT_DATA:totalRecord[]=[]
-  graphCollect:Array<any>=[];
+  graphCollect:any=[];
   
   dataSource:any;
   columnsToDisplay = ['name', 'easy', 'medium', 'hard'];
@@ -66,18 +66,19 @@ export class HomepageComponent implements OnInit {
           arr.push(element.difficult)
           dataGraph.push(arr)
         }
-        this.graphCollect.push(dataGraph)
-        //console.log(x[0]['time'])
+        this.graphCollect[this.var[i]['email']]=dataGraph
+      
       }
-      console.log(this.graphCollect[0])
+      console.log(this.graphCollect)
 
       this.var=data;
       for(let i=0;i<this.var.length;i++){
-        var temp:totalRecord= {name:null,easy:null,medium:null,hard:null};
+        var temp:totalRecord= {name:null,email:null,easy:null,medium:null,hard:null};
         temp.name=this.var[i]['name'];
        temp.easy=this.var[i]['totalEasy'];
         temp.medium=this.var[i]['totalMedium'];
         temp.hard=this.var[i]['totalDifficult'];
+        temp.email=this.var[i]['email']
        this.ELEMENT_DATA.push(temp)
      }
      this.dataSource=this.ELEMENT_DATA;
@@ -126,6 +127,7 @@ export class HomepageComponent implements OnInit {
 
 export interface totalRecord {
   name: string;
+  email: string;
   hard: number;
   easy: number;
   medium: number;
@@ -136,4 +138,3 @@ export interface dataPoint{
   medium:number;
   difficult:number;
 }
-
