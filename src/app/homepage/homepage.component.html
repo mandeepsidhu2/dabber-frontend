@@ -20,13 +20,12 @@
       </div>
       <div class="break"></div> 
       <div class="toggle">
-        <h1 style="font-size:50px; margin-top: 15%">{{now |date :"H:mm:ss"}}</h1>
-        <h1 style="font-size:40px; margin-top: 10%">{{now |date :"d MMM"}}</h1>
+        <h1 style="font-size:50px; margin-top: 20%">{{now |date :"H:mm:ss"}}</h1>
+        <h1 style="font-size:36px; margin-top: 10%">{{now |date :"d MMM"}}</h1>
       </div>
   </div>
-  <table mat-table 
-       [dataSource]="dataSource" multiTemplateDataRows
-       class="mat-elevation-z8">
+  <div class="example-container" style="overflow-x:auto;" >
+  <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
   <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
     <th style="text-align: center" mat-header-cell *matHeaderCellDef> {{column}} </th>
     <td style="text-align: center" mat-cell *matCellDef="let element"> {{element[column]}} </td>
@@ -61,5 +60,5 @@
   </tr>
   <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
 </table>
-
+</div>
 </div>
