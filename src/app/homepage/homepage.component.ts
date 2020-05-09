@@ -55,6 +55,7 @@ export class HomepageComponent implements OnInit {
   
     this.levelService.getAllData().subscribe(data=>{
       this.fillData(data) 
+      console.log(data)
     });
   }
   fillData(data:any){

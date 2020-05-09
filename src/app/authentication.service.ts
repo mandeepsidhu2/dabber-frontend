@@ -10,9 +10,9 @@ import { CookieService } from 'ngx-cookie-service';
 export class AuthenticationService {
 
   constructor(private http: HttpClient,private cookieService: CookieService) { }
-  endpoint = 'https://evening-beyond-06490.herokuapp.com/api/v1/login';
+ // endpoint = 'https://evening-beyond-06490.herokuapp.com/api/v1/login';
   
-  
+ endpoint = "http://localhost:3000/api/v1/login"
   login(access_token:string): Observable<any> {
    
     let headers=new HttpHeaders().set('token',access_token)
