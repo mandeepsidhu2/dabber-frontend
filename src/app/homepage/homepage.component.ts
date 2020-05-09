@@ -19,83 +19,100 @@ export class HomepageComponent implements OnInit {
   userData:any;
   loggedIn:Boolean=false
   
+  //for google line chart
   var:Array<any>;
-  ELEMENT_DATA:totalRecord[]=[]
   graphCollect:any=[];
-  
+  title = 'Coding Practice Progress';
+  type = 'LineChart';
+  columnNames = ["Date","easy", "medium", "hard"];
+  options = {   
+     hAxis: {
+        title: 'Date'
+     },
+     vAxis:{
+        title: 'Problems Solved'
+     },
+     colors:["#66ff66","#ffff00","#ff0000"]
+  };
+  width = 700;
+  height = 300; 
+
+  //for mat table
   dataSource:any;
+  ELEMENT_DATA:totalRecord[]=[]
   columnsToDisplay = ['name', 'easy', 'medium', 'hard'];
   expandedElement: totalRecord | null;
   
   ngOnInit(): void {
-    
-    this.levelService.getUserData().subscribe(data=>{
-      this.userData=data["user"];
-      if(localStorage.getItem(btoa("loggedIn"))==btoa("true"))
+    if(localStorage.getItem(btoa("loggedIn"))==btoa("true"))
       this.loggedIn=true;
-      else
+    else
       this.loggedIn=false;  
+
+    this.levelService.getUserData().subscribe(data=>{
+      this.userData=data["user"];    
     })
   
     this.levelService.getAllData().subscribe(data=>{
-      this.fillData(data)
-    
-    })
+      this.fillData(data) 
+    });
   }
   fillData(data:any){
       this.var=data;
-      console.log(data)
+      //go over each user
       for(let i=0;i<this.var.length;i++){
         let dataGraph:any[]=[]
-        var xEasy=this.var[i]['easy']
-        var xMedium=this.var[i]['medium']
-        var xDifficult=this.var[i]['difficult']
+        let xEasy=this.var[i]['easy']
+        let xMedium=this.var[i]['medium']
+        let xDifficult=this.var[i]['difficult']
+      //go over the track records of easy medium hard of each user
         for(let i=0;i<xEasy.length;i++){
           let xE=JSON.parse(xEasy[i])
           let xM=JSON.parse(xMedium[i])
           let xD=JSON.parse(xDifficult[i])
-          var element:dataPoint={date:null,easy:null,medium:null,difficult:null}
-          element.date=xE[0]['time']
-          element.easy=xE[0]['completed']
-          element.medium=xM[0]['completed']
-          element.difficult=xD[0]['completed']
           let arr:Array<any>=[]
-          arr.push(element.date)
-          arr.push(element.easy)
-          arr.push(element.medium)
-          arr.push(element.difficult)
+          arr.push(xE[0]['time'])
+          arr.push(xE[0]['completed'])
+          arr.push(xM[0]['completed'])
+          arr.push(xD[0]['completed'])
           dataGraph.push(arr)
         }
+        //push the data into the graph collection of all the users
         this.graphCollect[this.var[i]['email']]=dataGraph
       
       }
-      console.log(this.graphCollect)
 
+      //setting up the data for mat table
       this.var=data;
       for(let i=0;i<this.var.length;i++){
         var temp:totalRecord= {name:null,email:null,easy:null,medium:null,hard:null};
         temp.name=this.var[i]['name'];
-       temp.easy=this.var[i]['totalEasy'];
+        temp.easy=this.var[i]['totalEasy'];
         temp.medium=this.var[i]['totalMedium'];
         temp.hard=this.var[i]['totalDifficult'];
         temp.email=this.var[i]['email']
-       this.ELEMENT_DATA.push(temp)
+        this.ELEMENT_DATA.push(temp)
      }
+     //data source is read for the table
      this.dataSource=this.ELEMENT_DATA;
   }
   constructor(private levelService:LevelService) { 
+    //for the live time on screen
     setInterval(() => {
       this.now = new Date();
       
     }, 1);
   }
-  increaseLevels( level:string){
-    
+
+  //increase the number of problems solved in each category
+  increaseLevels( level:string){ 
     this.userData[level]=this.userData[level]+1
     this.levelService.changeLevel(level,this.userData[level]).subscribe(data=>{
       console.log(data);
     })
   }
+
+  //decrease the number of problems solved in each category
   decreaseLevels(level:string){
     if(this.userData[level]>0){
     this.userData[level]=this.userData[level]-1
@@ -104,24 +121,7 @@ export class HomepageComponent implements OnInit {
       console.log(data);
     })
   }
-  title = 'Coding Practice Progress';
-   type = 'LineChart';
-   columnNames = ["Date","easy", "medium", "hard"];
-   options = {   
-      hAxis: {
-         title: 'Date'
-      },
-      vAxis:{
-         title: 'Problems Solved'
-      },
-      colors:["#66ff66","#ffff00","#ff0000"]
-   };
-   width = 700;
-   height = 300;
 
-  
- 
- 
   
 }
 
@@ -131,10 +131,4 @@ export interface totalRecord {
   hard: number;
   easy: number;
   medium: number;
-}
-export interface dataPoint{
-  date: string;
-  easy:number;
-  medium:number;
-  difficult:number;
 }

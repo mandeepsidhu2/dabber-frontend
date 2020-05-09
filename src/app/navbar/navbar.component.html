@@ -9,15 +9,15 @@
         <li class="nav-item active">
           <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
         </li>
-        <li class="nav-item active">
-          <a class="nav-link" >Easy^ <span class="sr-only">(current)</span></a>
-        </li>
       </ul>
     
       <div  class="mt-2 mt-md-0">
         <ul *ngIf=!loggedIn class=" navbar-nav mr-auto">
           <li  class="nav-item">
-              <fa-icon style="color: white"class="fa-2x" (click)="signInWithGoogle()" [icon]="faGoogle"></fa-icon>
+               <button type="button" style="color: white" (click)="signInWithGoogle()" class="btn btn-outline-success">
+                  <fa-icon style="color: white"  [icon]="faGoogle"></fa-icon>
+                  &nbsp;Login
+              </button>                
           </li> 
         </ul>
       </div>

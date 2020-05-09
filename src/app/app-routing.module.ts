@@ -4,10 +4,16 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { NavbarComponent } from './navbar/navbar.component';
 
 
-const routes: Routes = [{
+const routes: Routes = [
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'home'
+  },
+  {
   path: '',
   component: NavbarComponent,
-children:[
+  children:[
 {
   path: 'home',
   component: HomepageComponent

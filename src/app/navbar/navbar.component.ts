@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from "angularx-social-login";
-import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
+import { GoogleLoginProvider } from "angularx-social-login";
 import { SocialUser } from "angularx-social-login";
 import {AuthenticationService} from "../authentication.service"
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
@@ -44,9 +44,5 @@ export class NavbarComponent implements OnInit {
     localStorage.setItem(btoa("loggedIn"),btoa("false"))
     window.location.reload();
   }
-  // increaseEasy(){
-  //   this.levelService.increaseLevel("easy",4).subscribe(data=>{
-  //     console.log(data);
-  //   })
-  // }
+
 }
