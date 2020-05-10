@@ -3,7 +3,7 @@
       <div class="toggle">
           <h1 style="font-weight:bold;margin-bottom: 10px;">Easy</h1>
           <button (click)="increaseLevels('easy')" type="button" class="btn btn-outline-success ">+</button>
-          <h1 >{{userData?.easy}}</h1>
+          <h1>{{userData?.easy}}</h1>
           <button (click)="decreaseLevels('easy')" type="button" class="btn btn-outline-danger ">-</button>
         </div>
       <div class="toggle">
@@ -25,6 +25,9 @@
       </div>
   </div>
   <div class="example-container" style="overflow-x:auto;" >
+    <div class="button-container">
+        <iframe width="30%" height="150" scrolling="no" frameborder="no"  src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/817461088&color=%230066cc&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>  
+      </div>
   <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
   <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
     <th style="text-align: center" mat-header-cell *matHeaderCellDef> {{column}} </th>
