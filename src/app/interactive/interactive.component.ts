@@ -19,6 +19,7 @@ export class InteractiveComponent implements OnInit {
       this.songs.push(data[i])
       this.currentSongIndex=0
       this.currentSong=this.sanitizer.bypassSecurityTrustResourceUrl(this.songs[this.currentSongIndex].link)
+      console.log(this.songs)
     })
   }
   nextSong(){
