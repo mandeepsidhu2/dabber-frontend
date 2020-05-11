@@ -1,0 +1,17 @@
+.button-container{
+    display: flex;
+    width: 90%;
+      margin-left: 5%;
+      margin-right: 5%;
+    justify-content: space-around;
+  }
+  .example-container.mat-elevation-z8 {    
+    overflow-x: auto;
+  }
+  .example-container .mat-table.mat-table {
+    min-width: 450px;
+  }
+  .fixed{
+    height: 200px;
+      overflow-y: scroll;
+  }
