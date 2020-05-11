@@ -16,10 +16,9 @@ export class InteractiveComponent implements OnInit {
   ngOnInit(): void {
     this.songService.getAllData().subscribe(data=>{
       for(let i=0;i<data.length;i++)
-      this.songs.push(data[i])
+      this.songs.push(data[i])     
       this.currentSongIndex=0
       this.currentSong=this.sanitizer.bypassSecurityTrustResourceUrl(this.songs[this.currentSongIndex].link)
-      console.log(this.songs)
     })
   }
   nextSong(){
