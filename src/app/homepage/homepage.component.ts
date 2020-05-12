@@ -24,7 +24,7 @@ export class HomepageComponent implements OnInit {
   graphCollect:any=[];
   title = 'Coding Practice Progress';
   type = 'LineChart';
-  columnNames = ["Date","easy", "medium", "hard"];
+  columnNames = ["Date","easy", "medium", "difficult"];
   options = {   
      hAxis: {
         title: 'Date'
@@ -40,7 +40,7 @@ export class HomepageComponent implements OnInit {
   //for mat table
   dataSource:any;
   ELEMENT_DATA:totalRecord[]=[]
-  columnsToDisplay = ['name', 'easy', 'medium', 'hard'];
+  columnsToDisplay = ['name', 'easy', 'medium', 'difficult'];
   expandedElement: totalRecord | null;
   
   ngOnInit(): void {
@@ -60,13 +60,14 @@ export class HomepageComponent implements OnInit {
   }
   fillData(data:any){
       this.var=data;
+      console.log(data)
       //go over each user
       for(let i=0;i<this.var.length;i++){
         let dataGraph:any[]=[]
         let xEasy=this.var[i]['easy']
         let xMedium=this.var[i]['medium']
         let xDifficult=this.var[i]['difficult']
-      //go over the track records of easy medium hard of each user
+      //go over the track records of easy medium difficult of each user
         for(let i=0;i<xEasy.length;i++){
           let xE=JSON.parse(xEasy[i])
           let xM=JSON.parse(xMedium[i])
@@ -86,11 +87,11 @@ export class HomepageComponent implements OnInit {
       //setting up the data for mat table
       this.var=data;
       for(let i=0;i<this.var.length;i++){
-        var temp:totalRecord= {name:null,email:null,easy:null,medium:null,hard:null};
+        var temp:totalRecord= {name:null,email:null,easy:null,medium:null,difficult:null};
         temp.name=this.var[i]['name'];
         temp.easy=this.var[i]['totalEasy'];
         temp.medium=this.var[i]['totalMedium'];
-        temp.hard=this.var[i]['totalDifficult'];
+        temp.difficult=this.var[i]['totalDifficult'];
         temp.email=this.var[i]['email']
         this.ELEMENT_DATA.push(temp)
      }
@@ -106,7 +107,23 @@ export class HomepageComponent implements OnInit {
   }
 
   //increase the number of problems solved in each category
-  increaseLevels( level:string){ 
+  increaseLevels( level:string,arg:number){ 
+    //to update google chart live for the concerned user
+    let size=this.graphCollect[this.userData.email].length
+    this.graphCollect[this.userData.email][size-1][arg]=this.userData[level]+1;
+    console.log(this.graphCollect[this.userData.email][size-1])
+    //code to update chart ends here
+
+    //to update the table live then hit the api
+    let email=this.userData.email
+    this.dataSource.filter(function(item){
+       if(item["email"]==email){
+         console.log(item)
+        item[level]+=1;
+    }})
+    //code for live update ends
+  
+    //updating database,API hit
     this.userData[level]=this.userData[level]+1
     this.levelService.changeLevel(level,this.userData[level]).subscribe(data=>{
       console.log(data);
@@ -117,10 +134,21 @@ export class HomepageComponent implements OnInit {
   decreaseLevels(level:string){
     if(this.userData[level]>0){
     this.userData[level]=this.userData[level]-1
-    }
-    this.levelService.changeLevel(level,this.userData[level]).subscribe(data=>{
+    //to update the table live then hit the api
+    let email=this.userData.email
+    this.dataSource.filter(function(item){
+       if(item["email"]==email){
+         console.log(item)
+        item[level]-=1;
+    }})
+    //code for live update ends
+
+     //updating database,API hit
+     this.levelService.changeLevel(level,this.userData[level]).subscribe(data=>{
       console.log(data);
     })
+
+    } 
   }
 
   
@@ -129,7 +157,7 @@ export class HomepageComponent implements OnInit {
 export interface totalRecord {
   name: string;
   email: string;
-  hard: number;
+  difficult: number;
   easy: number;
   medium: number;
 }
