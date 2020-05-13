@@ -21,20 +21,6 @@ export class LevelService {
     headers.set('Content-Type','application/json').set('Accept','application/json');
     return this.http.post<any>(this.endpoint,tableData,{headers});
   }
-  getAllData(pageIndex:number,pageSize:number):Observable<any>{
-    let tableData={pageIndex:null,pageSize:null};
-    tableData.pageIndex=pageIndex;tableData.pageSize=pageSize
-    this.endpoint=this.baseUrl+'/api/v1/all';
-    let headers=new HttpHeaders().set('token',atob(this.cookieService.get('token')));
-    headers.set('Content-Type','application/json').set('Accept','application/json');
-    return this.http.post<any>(this.endpoint,tableData,{headers});
-  }
-  getTableLength(){
-    this.endpoint=this.baseUrl+'/api/v1/size';
-    let headers=new HttpHeaders().set('token',atob(this.cookieService.get('token')));
-    headers.set('Content-Type','application/json').set('Accept','application/json');
-    return this.http.get<any>(this.endpoint,{headers});
-  }
   getUserData():Observable<any>{
     this.endpoint=this.baseUrl+'/api/v1/fetch';
     let headers=new HttpHeaders().set('token',atob(this.cookieService.get('token')));

@@ -53,7 +53,7 @@ export class HomepageComponent implements OnInit {
   
     this.pageIndexTable=0;
     this.pageSizeTable=5;
-    
+    this.forminput=""
     if(localStorage.getItem(btoa("loggedIn"))==btoa("true"))
       this.loggedIn=true;
     else
@@ -61,13 +61,9 @@ export class HomepageComponent implements OnInit {
 
     this.levelService.getUserData().subscribe(data=>{
       this.userData=data["user"];    
-    })
-    
-    this.levelService.getTableLength().subscribe(data =>{
-      this.lengthTable=data;
-    })
-    this.levelService.getAllData(this.pageIndexTable,this.pageSizeTable).subscribe(data=>{
-      this.fillData(data);
+    })  
+    this.levelService.getFilteredData(this.forminput,this.pageIndexTable,this.pageSizeTable).subscribe(data=>{
+      this.fillData(data); 
     });
   }
   keyDownFunction(event:any){
@@ -76,8 +72,23 @@ export class HomepageComponent implements OnInit {
     this.levelService.getFilteredData(this.forminput,this.pageIndexTable,this.pageSizeTable).subscribe(data=>{
       this.fillData(data)  
     });
+
+  }
+  getServerData(event?:PageEvent){
+    this.lengthTable=event.length;
+    this.pageIndexTable=event.pageIndex;
+    this.pageSizeTable=event.pageSize;
+    this.dataSource
+    this.ELEMENT_DATA=[]
+    console.log(this.forminput==null)
+    this.levelService.getFilteredData(this.forminput,this.pageIndexTable,this.pageSizeTable).subscribe(data=>{
+      this.fillData(data)   
+    });
   }
   fillData(data:any){
+    this.lengthTable=data[data.length-1]
+    data.pop()
+    
       this.var=data;
       //go over each user
       for(let i=0;i<this.var.length;i++){
@@ -116,16 +127,7 @@ export class HomepageComponent implements OnInit {
      //data source is read for the table
      this.dataSource=this.ELEMENT_DATA;
   }
-  getServerData(event?:PageEvent){
-    this.lengthTable=event.length;
-    this.pageIndexTable=event.pageIndex;
-    this.pageSizeTable=event.pageSize;
-    this.dataSource
-    this.ELEMENT_DATA=[]
-    this.levelService.getAllData(this.pageIndexTable,this.pageSizeTable).subscribe(data=>{
-      this.fillData(data)     
-    });
-  }
+
   constructor(private levelService:LevelService) { 
     //for the live time on screen
     setInterval(() => {
