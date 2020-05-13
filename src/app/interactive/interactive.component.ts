@@ -18,7 +18,6 @@ export class InteractiveComponent implements OnInit {
   currentSong:SafeResourceUrl=null;
   message:any
   addElement(event:any) {
-    console.log(this.name)
     if(event!=null && event.keyCode!=13)
      return;
     const p: HTMLParagraphElement = this.renderer.createElement('p');

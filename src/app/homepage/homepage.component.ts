@@ -67,8 +67,7 @@ export class HomepageComponent implements OnInit {
       this.lengthTable=data;
     })
     this.levelService.getAllData(this.pageIndexTable,this.pageSizeTable).subscribe(data=>{
-      this.fillData(data) 
-      console.log(data)
+      this.fillData(data);
     });
   }
   keyDownFunction(event:any){
