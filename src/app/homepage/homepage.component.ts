@@ -68,10 +68,12 @@ export class HomepageComponent implements OnInit {
   }
   keyDownFunction(event:any){
     this.ELEMENT_DATA=[]
-    if(event.keyCode==13)
-    this.levelService.getFilteredData(this.forminput,this.pageIndexTable,this.pageSizeTable).subscribe(data=>{
-      this.fillData(data)  
+    if(event.keyCode==13){
+    this.levelService.getFilteredData(this.forminput,0,this.pageSizeTable).subscribe(data=>{
+      this.fillData(data);
+      this.pageIndexTable=0;
     });
+    }
 
   }
   getServerData(event?:PageEvent){
@@ -80,7 +82,6 @@ export class HomepageComponent implements OnInit {
     this.pageSizeTable=event.pageSize;
     this.dataSource
     this.ELEMENT_DATA=[]
-    console.log(this.forminput==null)
     this.levelService.getFilteredData(this.forminput,this.pageIndexTable,this.pageSizeTable).subscribe(data=>{
       this.fillData(data)   
     });
@@ -154,7 +155,6 @@ export class HomepageComponent implements OnInit {
     let email=this.userData.email
     this.dataSource.filter(function(item){
        if(item["email"]==email){
-         console.log(item)
         item[level]+=1;
     }})
     //code for live update ends
@@ -162,7 +162,7 @@ export class HomepageComponent implements OnInit {
     //updating database,API hit
     this.userData[level]=this.userData[level]+1
     this.levelService.changeLevel(level,this.userData[level]).subscribe(data=>{
-      console.log(data);
+     // console.log(data);
     })
   }
 
@@ -174,14 +174,13 @@ export class HomepageComponent implements OnInit {
     let email=this.userData.email
     this.dataSource.filter(function(item){
        if(item["email"]==email){
-         console.log(item)
         item[level]-=1;
     }})
     //code for live update ends
 
      //updating database,API hit
      this.levelService.changeLevel(level,this.userData[level]).subscribe(data=>{
-      console.log(data);
+      //console.log(data);
     })
 
     } 

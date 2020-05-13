@@ -18,7 +18,6 @@ export class AuthenticationService {
     let headers=new HttpHeaders().set('token',access_token)
 
     return this.http.get<any>(this.endpoint,{headers}).pipe(map(data => {
-      console.log(data.user)
       this.cookieService.set('token', btoa(data.user.token));
   }));
 }

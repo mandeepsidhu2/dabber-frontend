@@ -27,9 +27,7 @@ export class NavbarComponent implements OnInit {
   signInWithGoogle(): void {
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then(
       (userData) => {
-        console.log(userData)
         this.authenticationService.login(userData.idToken).subscribe(data=>{
-         console.log(data);
          this.loggedIn=true
          localStorage.setItem(btoa("loggedIn"),btoa("true"))
          window.location.reload();

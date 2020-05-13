@@ -29,9 +29,8 @@ export class LevelService {
   }
   changeLevel(level:string,updateTo:number): Observable<any> {
     this.endpoint = this.baseUrl+'/api/v1/change';
-    this.ob.level=level;this.ob.completed=updateTo;this.ob.date=formatDate(new Date(), 'MM-dd-yyyy', 'en-US')
+    this.ob.level=level;this.ob.completed=updateTo;this.ob.date=formatDate(new Date(), 'MM-dd-yyyy', 'en-US','UTC+4')
     let headers=new HttpHeaders().set('token',atob(this.cookieService.get('token')));
-    console.log(atob(this.cookieService.get('token')))
     headers.set('Content-Type','application/json').set('Accept','application/json');
     return this.http.post<any>(this.endpoint,this.ob,{headers});
 }

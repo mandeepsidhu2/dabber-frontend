@@ -39,7 +39,6 @@ export class InteractiveComponent implements OnInit {
   nextSong(){
     this.currentSongIndex=(this.currentSongIndex+1)%(this.songs.length)
     this.currentSong=this.sanitizer.bypassSecurityTrustResourceUrl(this.songs[this.currentSongIndex].link)
-    console.log("Current index is " + this.currentSongIndex)
   }
   previousSong(){
     if(this.currentSongIndex > 0)
