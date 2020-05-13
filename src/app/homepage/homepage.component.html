@@ -26,7 +26,7 @@
   </div>
   <div class="example-container" style="overflow-x:auto;" >
     <app-interactive></app-interactive>
-  <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
+<table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
   <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
     <th style="text-align: center" mat-header-cell *matHeaderCellDef> {{column}} </th>
     <td style="text-align: center" mat-cell *matCellDef="let element"> {{element[column]}} </td>
@@ -58,8 +58,15 @@
       class="example-element-row"
       [class.example-expanded-row]="expandedElement === element"
       (click)="expandedElement = expandedElement === element ? null : element">
-  </tr>
+  </tr>  
   <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
 </table>
-</div>
+    <div class="paginator">
+      <mat-paginator [length]="lengthTable"
+      [pageIndex]="pageIndexTable"
+      [pageSize]="pageSizeTable"
+      [pageSizeOptions]="[1,2,3,5, 10, 25, 100]"
+      (page)="getServerData($event)" showFirstLastButtons></mat-paginator>
+    </div>
+ </div>
 </div>

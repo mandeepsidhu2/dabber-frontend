@@ -27,10 +27,15 @@
 .example-container .mat-table.mat-table {
   min-width: 450px;
 }
-table {
+table{
     width: 90%;
     margin-left: 5%;
     margin-right: 5%;
+  }
+.paginator{
+  display: flex;
+  margin-right: 5%;
+  justify-content: flex-end;
   }
   
   tr.example-detail-row {

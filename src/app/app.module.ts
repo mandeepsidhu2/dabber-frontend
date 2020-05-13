@@ -13,6 +13,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { InteractiveComponent } from './interactive/interactive.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
+
 let config = new AuthServiceConfig([
   {
     id: GoogleLoginProvider.PROVIDER_ID,
@@ -38,7 +40,8 @@ export function provideConfig() {
     GoogleChartsModule,
     SocialLoginModule,
     FontAwesomeModule,
-    NgbModule
+    NgbModule,
+    MatPaginatorModule
   ],
   providers: [
     {

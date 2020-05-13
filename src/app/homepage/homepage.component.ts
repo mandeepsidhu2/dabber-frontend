@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, OnInit, ViewChild } from '@angular/core';
+import {MatPaginatorModule, PageEvent} from '@angular/material/paginator';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import { LevelService } from '../level.service';
 @Component({
@@ -38,12 +38,19 @@ export class HomepageComponent implements OnInit {
   height = 300; 
 
   //for mat table
+  @ViewChild(MatPaginatorModule, {static: true}) paginator: MatPaginatorModule;
   dataSource:any;
+  lengthTable:number
+  pageIndexTable:number
+  pageSizeTable:number
   ELEMENT_DATA:totalRecord[]=[]
   columnsToDisplay = ['name', 'easy', 'medium', 'difficult'];
   expandedElement: totalRecord | null;
   
   ngOnInit(): void {
+    this.pageIndexTable=0;
+    this.pageSizeTable=5;
+    
     if(localStorage.getItem(btoa("loggedIn"))==btoa("true"))
       this.loggedIn=true;
     else
@@ -52,15 +59,17 @@ export class HomepageComponent implements OnInit {
     this.levelService.getUserData().subscribe(data=>{
       this.userData=data["user"];    
     })
-  
-    this.levelService.getAllData().subscribe(data=>{
+    
+    this.levelService.getTableLength().subscribe(data =>{
+      this.lengthTable=data;
+    })
+    this.levelService.getAllData(this.pageIndexTable,this.pageSizeTable).subscribe(data=>{
       this.fillData(data) 
       console.log(data)
     });
   }
   fillData(data:any){
       this.var=data;
-      console.log(data)
       //go over each user
       for(let i=0;i<this.var.length;i++){
         let dataGraph:any[]=[]
@@ -98,6 +107,16 @@ export class HomepageComponent implements OnInit {
      //data source is read for the table
      this.dataSource=this.ELEMENT_DATA;
   }
+  getServerData(event?:PageEvent){
+    this.lengthTable=event.length;
+    this.pageIndexTable=event.pageIndex;
+    this.pageSizeTable=event.pageSize;
+    this.dataSource
+    this.ELEMENT_DATA=[]
+    this.levelService.getAllData(this.pageIndexTable,this.pageSizeTable).subscribe(data=>{
+      this.fillData(data)     
+    });
+  }
   constructor(private levelService:LevelService) { 
     //for the live time on screen
     setInterval(() => {
@@ -109,9 +128,15 @@ export class HomepageComponent implements OnInit {
   //increase the number of problems solved in each category
   increaseLevels( level:string,arg:number){ 
     //to update google chart live for the concerned user
-    let size=this.graphCollect[this.userData.email].length
-    this.graphCollect[this.userData.email][size-1][arg]=this.userData[level]+1;
-    console.log(this.graphCollect[this.userData.email][size-1])
+    // let size=this.graphCollect[this.userData.email].length
+    // this.graphCollect[this.userData.email][size-1][arg]=this.userData[level]+1;
+    // console.log(this.graphCollect[this.userData.email][size-1])
+    // let x=this.graphCollect[this.userData.email];
+    // var chart=new google.visualization.LineChart(document.getElementById("txt1"))
+    // let y = new google.visualization.DataTable();
+    // y.addColumn("Date","easy", "medium");y.addColumn("Difficult")
+    // y.addRow(x)
+    // chart.draw(y,x)
     //code to update chart ends here
 
     //to update the table live then hit the api

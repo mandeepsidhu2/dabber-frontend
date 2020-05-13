@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SongService {
-  baseUrl = "https://evening-beyond-06490.herokuapp.com";
-  //baseUrl = "http://localhost:3000";
+  baseUrl = environment.baseUrl;
   constructor(private http: HttpClient,private cookieService: CookieService) { }
   endpoint=""
   ob:any={}
