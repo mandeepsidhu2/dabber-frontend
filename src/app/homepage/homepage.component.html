@@ -26,6 +26,14 @@
   </div>
   <div class="example-container" style="overflow-x:auto;" >
     <app-interactive></app-interactive>
+    
+
+  <mat-form-field (keydown)="keyDownFunction($event)" class="example-full-width">
+    <mat-label>Enter name or email</mat-label>
+    <input [(ngModel)]="forminput" matInput>
+  </mat-form-field>
+
+
 <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
   <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
     <th style="text-align: center" mat-header-cell *matHeaderCellDef> {{column}} </th>

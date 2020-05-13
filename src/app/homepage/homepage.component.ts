@@ -18,6 +18,8 @@ export class HomepageComponent implements OnInit {
   public now: Date = new Date();
   userData:any;
   loggedIn:Boolean=false
+  forminput:any
+  
   
   //for google line chart
   var:Array<any>;
@@ -48,6 +50,7 @@ export class HomepageComponent implements OnInit {
   expandedElement: totalRecord | null;
   
   ngOnInit(): void {
+  
     this.pageIndexTable=0;
     this.pageSizeTable=5;
     
@@ -66,6 +69,13 @@ export class HomepageComponent implements OnInit {
     this.levelService.getAllData(this.pageIndexTable,this.pageSizeTable).subscribe(data=>{
       this.fillData(data) 
       console.log(data)
+    });
+  }
+  keyDownFunction(event:any){
+    this.ELEMENT_DATA=[]
+    if(event.keyCode==13)
+    this.levelService.getFilteredData(this.forminput,this.pageIndexTable,this.pageSizeTable).subscribe(data=>{
+      this.fillData(data)  
     });
   }
   fillData(data:any){

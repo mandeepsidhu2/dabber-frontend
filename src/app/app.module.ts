@@ -14,6 +14,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { InteractiveComponent } from './interactive/interactive.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatInputModule} from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
+
 
 let config = new AuthServiceConfig([
   {
@@ -41,7 +44,9 @@ export function provideConfig() {
     SocialLoginModule,
     FontAwesomeModule,
     NgbModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatInputModule,
+    FormsModule
   ],
   providers: [
     {

@@ -13,9 +13,17 @@ export class LevelService {
   constructor(private http: HttpClient,private cookieService: CookieService) { }
   endpoint=""
   ob:any={}
+  getFilteredData(emailInitials:string,pageIndex:number,pageSize:number){
+    let tableData={pageIndex:null,pageSize:null,emailInitials:null};
+    tableData.pageIndex=pageIndex;tableData.pageSize=pageSize;tableData.emailInitials=emailInitials;
+    this.endpoint=this.baseUrl+'/api/v1/filter_all';
+    let headers=new HttpHeaders().set('token',atob(this.cookieService.get('token')));
+    headers.set('Content-Type','application/json').set('Accept','application/json');
+    return this.http.post<any>(this.endpoint,tableData,{headers});
+  }
   getAllData(pageIndex:number,pageSize:number):Observable<any>{
-    let tableData={length:null,pageIndex:null,pageSize:null};
-    tableData.length=length;tableData.pageIndex=pageIndex;tableData.pageSize=pageSize
+    let tableData={pageIndex:null,pageSize:null};
+    tableData.pageIndex=pageIndex;tableData.pageSize=pageSize
     this.endpoint=this.baseUrl+'/api/v1/all';
     let headers=new HttpHeaders().set('token',atob(this.cookieService.get('token')));
     headers.set('Content-Type','application/json').set('Accept','application/json');

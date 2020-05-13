@@ -32,6 +32,11 @@ table{
     margin-left: 5%;
     margin-right: 5%;
   }
+  mat-form-field{
+    display: flex;
+  margin-left: 5%;
+  justify-content: flex-start;
+  }
 .paginator{
   display: flex;
   margin-right: 5%;
