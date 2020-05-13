@@ -24,8 +24,8 @@
         <h1 style="font-size:36px; margin-top: 10%">{{now |date :"d MMM"}}</h1>
       </div>
   </div>
-  <div class="example-container" style="overflow-x:auto;" >
-    <app-interactive></app-interactive>
+  <div class="example-container" style="overflow-x:auto;" >{{userData?.email}}
+    <app-interactive [name]="userData?.name"></app-interactive>
     
 
   <mat-form-field (keydown)="keyDownFunction($event)" class="example-full-width">

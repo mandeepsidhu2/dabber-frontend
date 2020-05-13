@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2, ViewChild, ElementRef  } from '@angular/core';
+import { Component, OnInit, Renderer2, ViewChild, ElementRef, Input  } from '@angular/core';
 import { SongService } from '../song.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { faPaperPlane } from '@fortawesome/free-regular-svg-icons';
@@ -10,15 +10,19 @@ import { faPaperPlane } from '@fortawesome/free-regular-svg-icons';
 })
 export class InteractiveComponent implements OnInit {
   @ViewChild('chathistory') div: ElementRef;
+  @Input() name: string;
   constructor(private renderer: Renderer2,private songService:SongService,private sanitizer:DomSanitizer,) { }
   songs:Array<any>=[]
   faPaperPlane=faPaperPlane;
   currentSongIndex:number;
   currentSong:SafeResourceUrl=null;
   message:any
-  addElement() {
+  addElement(event:any) {
+    console.log(this.name)
+    if(event!=null && event.keyCode!=13)
+     return;
     const p: HTMLParagraphElement = this.renderer.createElement('p');
-    p.innerHTML = this.message;
+    p.innerHTML = this.name+": "+this.message;
     this.message=null
     this.renderer.appendChild(this.div.nativeElement, p)
     this.div.nativeElement.scrollTop=this.div.nativeElement.scrollHeight;
