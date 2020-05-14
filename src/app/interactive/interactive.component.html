@@ -3,9 +3,9 @@
     <iframe width="70%" height="150" scrolling="no" frameborder="no"   [attr.src]="currentSong"></iframe> 
     <div style="width:40%;border:1px solid black;position:relative;"class="fixed">
         <div #chathistory style="width:100%;height:87%; overflow:auto;"></div>
-        <input (keydown)="addElement($event)" [(ngModel)]="message" style="width:100%;position: absolute;left:0;bottom:0;" type="text" id="fname" name="fname">
+        <input (keydown)="sendMessage($event)" [(ngModel)]="message" style="width:100%;position: absolute;left:0;bottom:0;" type="text" id="fname" name="fname">
         <div style="position: absolute;right:0;bottom:0;">
-            <fa-icon  (click)='addElement(null)' style="color:green"  class="fa-lg" [icon]="faPaperPlane"></fa-icon>
+            <fa-icon  (click)='sendMessage(null)' style="color:green"  class="fa-lg" [icon]="faPaperPlane"></fa-icon>
         </div>
     </div> 
 </div>

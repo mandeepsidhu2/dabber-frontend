@@ -16,8 +16,10 @@ import { InteractiveComponent } from './interactive/interactive.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatInputModule} from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { environment } from 'src/environments/environment';
 
-
+const socketConfig: SocketIoConfig = { url: environment.nodeChatUrl, options: {} };
 let config = new AuthServiceConfig([
   {
     id: GoogleLoginProvider.PROVIDER_ID,
@@ -46,7 +48,8 @@ export function provideConfig() {
     NgbModule,
     MatPaginatorModule,
     MatInputModule,
-    FormsModule
+    FormsModule,
+    SocketIoModule.forRoot(socketConfig)
   ],
   providers: [
     {
