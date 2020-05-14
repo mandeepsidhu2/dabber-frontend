@@ -12,6 +12,7 @@ import { ChatService } from '../chat.service';
 export class InteractiveComponent implements OnInit {
   @ViewChild('chathistory') div: ElementRef;
   @Input() name: string;
+  userId:any;
   constructor(private chatService: ChatService,private renderer: Renderer2,private songService:SongService,private sanitizer:DomSanitizer,) { }
   songs:Array<any>=[]
   faPaperPlane=faPaperPlane;
@@ -29,16 +30,10 @@ export class InteractiveComponent implements OnInit {
   }
   connection
   ngOnInit(): void {
+    this.userId=atob(localStorage.getItem(btoa("userId")))
+    this.userId=Number(this.userId)
     this.connection=this.chatService.getMessages().subscribe(data => {
-        console.log("message recieved "+ data[0],this.name)
-        if(data[0]==this.name)
-          data="You: "+data[1];
-        else
-          data=data[0]+": "+data[1];
-        const p: HTMLParagraphElement = this.renderer.createElement('p');
-        p.innerHTML = String(data);
-        this.renderer.appendChild(this.div.nativeElement, p)
-        this.div.nativeElement.scrollTop=this.div.nativeElement.scrollHeight;
+        this.addToChat(data);
       });
     this.songService.getAllData().subscribe(data=>{
       for(let i=0;i<data.length;i++)
@@ -46,6 +41,16 @@ export class InteractiveComponent implements OnInit {
       this.currentSongIndex=0
       this.currentSong=this.sanitizer.bypassSecurityTrustResourceUrl(this.songs[this.currentSongIndex].link)
     })
+  }
+  addToChat(data:any){
+    if(data[0]==this.name)
+    data="You: "+data[1];
+  else
+    data=data[0]+": "+data[1];
+    const p: HTMLParagraphElement = this.renderer.createElement('p');
+    p.innerHTML = String(data);
+    this.renderer.appendChild(this.div.nativeElement, p)
+    this.div.nativeElement.scrollTop=this.div.nativeElement.scrollHeight;
   }
   ngOnDestroy() {
     this.connection.unsubscribe();

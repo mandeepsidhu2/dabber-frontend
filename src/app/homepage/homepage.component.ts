@@ -60,7 +60,8 @@ export class HomepageComponent implements OnInit {
       this.loggedIn=false;  
 
     this.levelService.getUserData().subscribe(data=>{
-      this.userData=data["user"];    
+      this.userData=data["user"];   
+      localStorage.setItem(btoa("userId"),btoa(this.userData["id"]) )
     })  
     this.levelService.getFilteredData(this.forminput,this.pageIndexTable,this.pageSizeTable).subscribe(data=>{
       this.fillData(data); 
