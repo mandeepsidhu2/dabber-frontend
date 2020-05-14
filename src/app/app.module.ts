@@ -20,6 +20,7 @@ import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { environment } from 'src/environments/environment';
 
 const socketConfig: SocketIoConfig = { url: environment.nodeChatUrl, options: {} };
+
 let config = new AuthServiceConfig([
   {
     id: GoogleLoginProvider.PROVIDER_ID,
