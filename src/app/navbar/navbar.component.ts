@@ -34,6 +34,7 @@ export class NavbarComponent implements OnInit {
          localStorage.setItem(btoa("loggedIn"),btoa("true"))
          localStorage.setItem(btoa("loggedInDoCheckHomepage"),btoa("true"))
          localStorage.setItem(btoa("loggedInDoCheckInteractive"),btoa("true"))
+         this.notifier.notify("success", "Signed In, Welcome to TABBER");
           });
   })
   

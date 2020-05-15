@@ -3,6 +3,7 @@ import { SongService } from '../song.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { faPaperPlane } from '@fortawesome/free-regular-svg-icons';
 import { ChatService } from '../chat.service';
+import { NotifierService } from "angular-notifier";
 
 @Component({
   selector: 'app-interactive',
@@ -13,15 +14,22 @@ export class InteractiveComponent implements OnInit {
   @ViewChild('chathistory') div: ElementRef;
   @Input() name: string;
   userId:any;
-  constructor(private chatService: ChatService,private renderer: Renderer2,private songService:SongService,private sanitizer:DomSanitizer,) { }
+  constructor(private notifierService: NotifierService,private chatService: ChatService,private renderer: Renderer2,private songService:SongService,private sanitizer:DomSanitizer,) { 
+    this.notifier = notifierService;
+  }
   songs:Array<any>=[]
   faPaperPlane=faPaperPlane;
   currentSongIndex:number;
   currentSong:SafeResourceUrl=null;
   message:any
   loggedIn:boolean=false;
-
+  private readonly notifier: NotifierService;
   
+  displayWarning(){
+    if(!this.loggedIn)
+    this.notifier.notify("error", "Login to chat ! ");
+  }
+
   sendMessage(event:any) {
     if(event!=null && event.keyCode!=13)
      return;
@@ -92,5 +100,6 @@ export class InteractiveComponent implements OnInit {
     this.currentSong=this.sanitizer.bypassSecurityTrustResourceUrl(this.songs[this.currentSongIndex].link)
 
   }
+ 
 
 }

@@ -17,6 +17,14 @@ import { NotifierService } from "angular-notifier";
   ],
 })
 export class HomepageComponent implements OnInit {
+  constructor(private levelService:LevelService,private notifierService: NotifierService) { 
+    //for the live time on screen
+    setInterval(() => {
+      this.now = new Date();
+      
+    }, 1);
+    this.notifier = notifierService;
+  }
   public now: Date = new Date();
   userData:any;
   loggedIn:Boolean=false
@@ -50,7 +58,7 @@ export class HomepageComponent implements OnInit {
   ELEMENT_DATA:totalRecord[]=[]
   columnsToDisplay = ['name', 'easy', 'medium', 'difficult'];
   expandedElement: totalRecord | null;
-  
+
   initaliseData(loggedInStatus:Boolean){
     this.pageIndexTable=0;
     this.pageSizeTable=5;
@@ -145,14 +153,7 @@ export class HomepageComponent implements OnInit {
      this.dataSource=this.ELEMENT_DATA;
   }
 
-  constructor(private levelService:LevelService,private notifierService: NotifierService) { 
-    //for the live time on screen
-    setInterval(() => {
-      this.now = new Date();
-      
-    }, 1);
-    this.notifier = notifierService;
-  }
+ 
 
   //increase the number of problems solved in each category
   increaseLevels( level:string,arg:number){ 
@@ -178,7 +179,7 @@ export class HomepageComponent implements OnInit {
   
     //updating database,API hit
     this.userData[level]=this.userData[level]+1
-    this.notifier.notify("success", "Yayy,your score is "+this.userData[level]+" for level "+level);
+    this.notifier.notify("success", "Yayy ,your score is "+this.userData[level]+" for level "+level);
     this.levelService.changeLevel(level,this.userData[level]).subscribe(data=>{
      // console.log(data);
     })
