@@ -33,6 +33,12 @@ export class InteractiveComponent implements OnInit {
 
   }
   connection
+  ngDoCheck() {
+    if(localStorage.getItem(btoa("loggedInDoCheckInteractive"))==btoa("true")){
+    localStorage.setItem(btoa("loggedInDoCheckInteractive"),btoa("false"))
+    this.loggedIn=true;
+    }
+  }
   ngOnInit(): void {
     this.userId=atob(localStorage.getItem(btoa("userId")))
     this.userId=Number(this.userId)

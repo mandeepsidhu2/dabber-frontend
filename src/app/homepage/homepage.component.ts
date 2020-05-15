@@ -51,20 +51,33 @@ export class HomepageComponent implements OnInit {
   columnsToDisplay = ['name', 'easy', 'medium', 'difficult'];
   expandedElement: totalRecord | null;
   
-  ngOnInit(): void {
+  initaliseData(loggedInStatus:Boolean){
     this.pageIndexTable=0;
     this.pageSizeTable=5;
     this.forminput=""
+    if(loggedInStatus){
+      this.loggedIn=true;
+      this.levelService.getUserData().subscribe(data=>{
+        this.userData=data["user"];   
+        localStorage.setItem(btoa("userId"),btoa(this.userData["id"]) )
+      }) 
+    }
+  }
+
+  ngDoCheck() {
+    if(localStorage.getItem(btoa("loggedInDoCheckHomepage"))==btoa("true")){
+    localStorage.setItem(btoa("loggedInDoCheckHomepage"),btoa("false"))
+    this.initaliseData(true);
+    console.log("login detected")
+    }
+  }
+ 
+  ngOnInit(): void {
     if(localStorage.getItem(btoa("loggedIn"))==btoa("true"))
       this.loggedIn=true;
     else
       this.loggedIn=false;  
-
-    if(this.loggedIn)
-    this.levelService.getUserData().subscribe(data=>{
-      this.userData=data["user"];   
-      localStorage.setItem(btoa("userId"),btoa(this.userData["id"]) )
-    })  
+    this.initaliseData(this.loggedIn);
     this.levelService.getFilteredData(this.forminput,this.pageIndexTable,this.pageSizeTable).subscribe(data=>{
       this.fillData(data); 
     });

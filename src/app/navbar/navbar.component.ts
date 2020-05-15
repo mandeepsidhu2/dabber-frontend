@@ -32,7 +32,8 @@ export class NavbarComponent implements OnInit {
         this.authenticationService.login(userData.idToken).subscribe(data=>{
          this.loggedIn=true
          localStorage.setItem(btoa("loggedIn"),btoa("true"))
-         window.location.reload();
+         localStorage.setItem(btoa("loggedInDoCheckHomepage"),btoa("true"))
+         localStorage.setItem(btoa("loggedInDoCheckInteractive"),btoa("true"))
           });
   })
   
