@@ -4,7 +4,8 @@ import { GoogleLoginProvider } from "angularx-social-login";
 import { SocialUser } from "angularx-social-login";
 import {AuthenticationService} from "../authentication.service"
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
-import {LevelService} from '../level.service'
+import { NotifierService } from "angular-notifier";
+
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -15,7 +16,8 @@ export class NavbarComponent implements OnInit {
    loggedIn: boolean;
    faGoogle=faGoogle;
    public isCollapsed = true;
-  constructor(private levelService:LevelService,private authenticationService:AuthenticationService,private socialAuthService: AuthService,private authService: AuthService) { }
+   private readonly notifier: NotifierService;
+  constructor(notifierService: NotifierService,private authenticationService:AuthenticationService,private socialAuthService: AuthService,private authService: AuthService) {   this.notifier = notifierService;}
 
   ngOnInit(): void {
     this.authService.authState.subscribe((user) => {
@@ -31,8 +33,7 @@ export class NavbarComponent implements OnInit {
          this.loggedIn=true
          localStorage.setItem(btoa("loggedIn"),btoa("true"))
          window.location.reload();
-              
-       });
+          });
   })
   
 }

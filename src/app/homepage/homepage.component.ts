@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import {MatPaginatorModule, PageEvent} from '@angular/material/paginator';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import { LevelService } from '../level.service';
+import { NotifierService } from "angular-notifier";
+
 @Component({
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',
@@ -19,7 +21,7 @@ export class HomepageComponent implements OnInit {
   userData:any;
   loggedIn:Boolean=false
   forminput:any
-  
+  private readonly notifier: NotifierService;
   
   //for google line chart
   var:Array<any>;
@@ -50,7 +52,6 @@ export class HomepageComponent implements OnInit {
   expandedElement: totalRecord | null;
   
   ngOnInit(): void {
-  
     this.pageIndexTable=0;
     this.pageSizeTable=5;
     this.forminput=""
@@ -58,6 +59,7 @@ export class HomepageComponent implements OnInit {
       this.loggedIn=true;
     else
       this.loggedIn=false;  
+
     if(this.loggedIn)
     this.levelService.getUserData().subscribe(data=>{
       this.userData=data["user"];   
@@ -130,12 +132,13 @@ export class HomepageComponent implements OnInit {
      this.dataSource=this.ELEMENT_DATA;
   }
 
-  constructor(private levelService:LevelService) { 
+  constructor(private levelService:LevelService,private notifierService: NotifierService) { 
     //for the live time on screen
     setInterval(() => {
       this.now = new Date();
       
     }, 1);
+    this.notifier = notifierService;
   }
 
   //increase the number of problems solved in each category
@@ -162,6 +165,7 @@ export class HomepageComponent implements OnInit {
   
     //updating database,API hit
     this.userData[level]=this.userData[level]+1
+    this.notifier.notify("success", "Yayy,your score is "+this.userData[level]+" for level "+level);
     this.levelService.changeLevel(level,this.userData[level]).subscribe(data=>{
      // console.log(data);
     })
@@ -170,6 +174,8 @@ export class HomepageComponent implements OnInit {
   //decrease the number of problems solved in each category
   decreaseLevels(level:string){
     if(this.userData[level]>0){
+      this.notifier.notify("info", "OOPSSS");
+
     this.userData[level]=this.userData[level]-1
     //to update the table live then hit the api
     let email=this.userData.email

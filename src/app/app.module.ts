@@ -18,9 +18,9 @@ import {MatInputModule} from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { environment } from 'src/environments/environment';
-
+import { NotifierModule } from "angular-notifier";
+import {customNotifierOptions} from './notifierconfig'
 const socketConfig: SocketIoConfig = { url: environment.nodeChatUrl, options: {} };
-
 let config = new AuthServiceConfig([
   {
     id: GoogleLoginProvider.PROVIDER_ID,
@@ -50,6 +50,7 @@ export function provideConfig() {
     MatPaginatorModule,
     MatInputModule,
     FormsModule,
+    NotifierModule.withConfig(customNotifierOptions),
     SocketIoModule.forRoot(socketConfig)
   ],
   providers: [
