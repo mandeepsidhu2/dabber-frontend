@@ -58,7 +58,7 @@ export class HomepageComponent implements OnInit {
       this.loggedIn=true;
     else
       this.loggedIn=false;  
-
+    if(this.loggedIn)
     this.levelService.getUserData().subscribe(data=>{
       this.userData=data["user"];   
       localStorage.setItem(btoa("userId"),btoa(this.userData["id"]) )

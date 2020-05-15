@@ -19,11 +19,15 @@ export class InteractiveComponent implements OnInit {
   currentSongIndex:number;
   currentSong:SafeResourceUrl=null;
   message:any
+  loggedIn:boolean=false;
 
   
   sendMessage(event:any) {
     if(event!=null && event.keyCode!=13)
      return;
+    if(this.message==null||this.message=="")
+    return
+    this.chatService.addMessageToChatHistory(this.userId,this.name,this.message).subscribe(data=>{console.log(data)})
     this.chatService.sendMessage([this.name,this.message]);
     this.message = '';
 
@@ -32,9 +36,17 @@ export class InteractiveComponent implements OnInit {
   ngOnInit(): void {
     this.userId=atob(localStorage.getItem(btoa("userId")))
     this.userId=Number(this.userId)
+    if(localStorage.getItem(btoa("loggedIn"))==btoa("true"))
+      this.loggedIn=true;
+    else
+      this.loggedIn=false;  
+
     this.connection=this.chatService.getMessages().subscribe(data => {
         this.addToChat(data);
       });
+    this.chatService.getAllChat().subscribe(data=>{
+      this.addOldChat(data);
+    })
     this.songService.getAllData().subscribe(data=>{
       for(let i=0;i<data.length;i++)
       this.songs.push(data[i])     
@@ -42,10 +54,19 @@ export class InteractiveComponent implements OnInit {
       this.currentSong=this.sanitizer.bypassSecurityTrustResourceUrl(this.songs[this.currentSongIndex].link)
     })
   }
+  addOldChat(chatHistory:any){
+    for(let i=0;i<chatHistory.length;i++){
+      let data=[]
+      data.push(chatHistory[i]['name'])
+      data.push(chatHistory[i]['message'])
+      this.addToChat(data);
+    }
+  }
   addToChat(data:any){
+
     if(data[0]==this.name)
     data="You: "+data[1];
-  else
+    else
     data=data[0]+": "+data[1];
     const p: HTMLParagraphElement = this.renderer.createElement('p');
     p.innerHTML = String(data);
