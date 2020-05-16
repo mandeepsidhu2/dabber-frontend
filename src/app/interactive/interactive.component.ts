@@ -4,7 +4,6 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { faPaperPlane } from '@fortawesome/free-regular-svg-icons';
 import { ChatService } from '../chat.service';
 import { NotifierService } from "angular-notifier";
-
 @Component({
   selector: 'app-interactive',
   templateUrl: './interactive.component.html',
@@ -41,11 +40,13 @@ export class InteractiveComponent implements OnInit {
 
   }
   connection
-  ngDoCheck() {
-    if(localStorage.getItem(btoa("loggedInDoCheckInteractive"))==btoa("true")){
-    localStorage.setItem(btoa("loggedInDoCheckInteractive"),btoa("false"))
+  ngOnChanges(){
+    if(localStorage.getItem(btoa("loggedIn"))==btoa("true"))
     this.loggedIn=true;
-    }
+    document.getElementsByClassName("chatHistory")[0].innerHTML=""
+    this.chatService.getAllChat().subscribe(data=>{
+      this.addOldChat(data);
+    })
   }
   ngOnInit(): void {
     this.userId=atob(localStorage.getItem(btoa("userId")))

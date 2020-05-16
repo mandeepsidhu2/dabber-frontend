@@ -5,11 +5,12 @@ import { SocialUser } from "angularx-social-login";
 import {AuthenticationService} from "../authentication.service"
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { NotifierService } from "angular-notifier";
-
+import {DataService} from "../data.service"
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  styleUrls: ['./navbar.component.css'],
+  providers: [DataService]
 })
 export class NavbarComponent implements OnInit {
    user: SocialUser;
@@ -17,7 +18,9 @@ export class NavbarComponent implements OnInit {
    faGoogle=faGoogle;
    public isCollapsed = true;
    private readonly notifier: NotifierService;
-  constructor(notifierService: NotifierService,private authenticationService:AuthenticationService,private socialAuthService: AuthService,private authService: AuthService) {   this.notifier = notifierService;}
+  constructor(private dataService:DataService,notifierService: NotifierService,private authenticationService:AuthenticationService,private socialAuthService: AuthService,private authService: AuthService) { 
+      this.notifier = notifierService;
+  }
 
   ngOnInit(): void {
     this.authService.authState.subscribe((user) => {
@@ -32,8 +35,7 @@ export class NavbarComponent implements OnInit {
         this.authenticationService.login(userData.idToken).subscribe(data=>{
          this.loggedIn=true
          localStorage.setItem(btoa("loggedIn"),btoa("true"))
-         localStorage.setItem(btoa("loggedInDoCheckHomepage"),btoa("true"))
-         localStorage.setItem(btoa("loggedInDoCheckInteractive"),btoa("true"))
+         this.dataService.sendData("sending signal to homepage for login ...");
          this.notifier.notify("success", "Signed In, Welcome to TABBER");
           });
   })

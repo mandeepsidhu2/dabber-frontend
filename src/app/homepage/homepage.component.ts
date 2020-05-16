@@ -3,6 +3,7 @@ import {MatPaginatorModule, PageEvent} from '@angular/material/paginator';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import { LevelService } from '../level.service';
 import { NotifierService } from "angular-notifier";
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-homepage',
@@ -17,7 +18,10 @@ import { NotifierService } from "angular-notifier";
   ],
 })
 export class HomepageComponent implements OnInit {
-  constructor(private levelService:LevelService,private notifierService: NotifierService) { 
+  constructor(private dataService:DataService,private levelService:LevelService,private notifierService: NotifierService) { 
+    dataService.userData$.subscribe(data=>{ 
+        this.initaliseData(true);
+    });
     //for the live time on screen
     setInterval(() => {
       this.now = new Date();
@@ -25,6 +29,7 @@ export class HomepageComponent implements OnInit {
     }, 1);
     this.notifier = notifierService;
   }
+ 
   public now: Date = new Date();
   userData:any;
   loggedIn:Boolean=false
@@ -72,22 +77,14 @@ export class HomepageComponent implements OnInit {
     }
   }
 
-  ngDoCheck() {
-    if(localStorage.getItem(btoa("loggedInDoCheckHomepage"))==btoa("true")){
-    localStorage.setItem(btoa("loggedInDoCheckHomepage"),btoa("false"))
-    this.initaliseData(true);
-    console.log("login detected")
-    }
-  }
- 
   ngOnInit(): void {
     if(localStorage.getItem(btoa("loggedIn"))==btoa("true"))
       this.loggedIn=true;
     else
-      this.loggedIn=false;  
+    this.loggedIn=false;  
     this.initaliseData(this.loggedIn);
     this.levelService.getFilteredData(this.forminput,this.pageIndexTable,this.pageSizeTable).subscribe(data=>{
-      this.fillData(data); 
+    this.fillData(data); 
     });
   }
   keyDownFunction(event:any){
@@ -134,10 +131,8 @@ export class HomepageComponent implements OnInit {
           dataGraph.push(arr)
         }
         //push the data into the graph collection of all the users
-        this.graphCollect[this.var[i]['email']]=dataGraph
-      
+        this.graphCollect[this.var[i]['email']]=dataGraph     
       }
-
       //setting up the data for mat table
       this.var=data;
       for(let i=0;i<this.var.length;i++){
