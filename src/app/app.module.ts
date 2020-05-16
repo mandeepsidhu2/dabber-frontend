@@ -19,7 +19,11 @@ import { FormsModule } from '@angular/forms';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { environment } from 'src/environments/environment';
 import { NotifierModule } from "angular-notifier";
-import {customNotifierOptions} from './notifierconfig'
+import {customNotifierOptions} from './notifierconfig';
+import { AboutComponent } from './about/about.component'
+import {MatCardModule} from '@angular/material/card';
+import {MatGridListModule} from '@angular/material/grid-list';
+
 const socketConfig: SocketIoConfig = { url: environment.nodeChatUrl, options: {} };
 let config = new AuthServiceConfig([
   {
@@ -35,7 +39,8 @@ export function provideConfig() {
     AppComponent,
     HomepageComponent,
     NavbarComponent,
-    InteractiveComponent
+    InteractiveComponent,
+    AboutComponent
   ],
   imports: [
     HttpClientModule,
@@ -51,7 +56,9 @@ export function provideConfig() {
     MatInputModule,
     FormsModule,
     NotifierModule.withConfig(customNotifierOptions),
-    SocketIoModule.forRoot(socketConfig)
+    SocketIoModule.forRoot(socketConfig),
+    MatGridListModule,
+    MatCardModule
   ],
   providers: [
     {
