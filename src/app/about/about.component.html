@@ -15,11 +15,14 @@
         </mat-grid-tile>
     </mat-grid-list>
 
+    <h2 style="margin: 0%" class="mat-display-1">A slide show of features</h2>
+
     <mat-carousel   timings="250ms ease-in"
     [autoplay]="true"
     interval="5000"
     color="white"
     maxWidth="auto"
+    maxHeight="auto"
     proportion="25"
     slides="5"
     [loop]="true"
@@ -29,15 +32,20 @@
     [useMouseWheel]="false"
     orientation="ltr">
             <mat-carousel-slide>
-                <h2>Here is it</h2>
-                 <img src="https://i.picsum.photos/id/237/200/300.jpg">
+                <img  class="center" src="../../assets/img1.png">
             </mat-carousel-slide>
-                  <mat-carousel-slide>
-                        <img src="https://picsum.photos/seed/picsum/200/300">
-                         </mat-carousel-slide>
-                         <mat-carousel-slide>
-                                <img src="https://i.picsum.photos/id/217/200/300.jpg">
-                                 </mat-carousel-slide>
+            <mat-carousel-slide>
+                <img  class="center" src="../../assets/img2.png">
+            </mat-carousel-slide>
+            <mat-carousel-slide>
+                <img  class="center" src="../../assets/img3.png">
+            </mat-carousel-slide>
+            <mat-carousel-slide>
+                <img  class="center" src="../../assets/img4.png">
+            </mat-carousel-slide>
+
 </mat-carousel>
+<!-- <h3 style="align-content: center;text-align: center">Search for your friends</h3> -->
+
    
 </div>
