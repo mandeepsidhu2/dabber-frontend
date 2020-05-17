@@ -4,6 +4,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { faPaperPlane } from '@fortawesome/free-regular-svg-icons';
 import { ChatService } from '../chat.service';
 import { NotifierService } from "angular-notifier";
+
 @Component({
   selector: 'app-interactive',
   templateUrl: './interactive.component.html',
@@ -84,7 +85,7 @@ export class InteractiveComponent implements OnInit {
     else
     data=data[0]+": "+data[1];
     const p: HTMLParagraphElement = this.renderer.createElement('p');
-    p.innerHTML = String(data);
+    p.innerHTML = String(this.linkify(data));
     this.renderer.appendChild(this.div.nativeElement, p)
     this.div.nativeElement.scrollTop=this.div.nativeElement.scrollHeight;
   }
@@ -101,6 +102,25 @@ export class InteractiveComponent implements OnInit {
     this.currentSong=this.sanitizer.bypassSecurityTrustResourceUrl(this.songs[this.currentSongIndex].link)
 
   }
- 
+  private linkify(plainText): string{
+    let replacedText;
+    let replacePattern1;
+    let replacePattern2;
+    let replacePattern3;
+
+    //URLs starting with http://, https://, or ftp://
+    replacePattern1 = /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
+    replacedText = plainText.replace(replacePattern1, '<a href="$1" target="_blank">$1</a>');
+
+    //URLs starting with "www." (without // before it, or it'd re-link the ones done above).
+    replacePattern2 = /(^|[^\/])(www\.[\S]+(\b|$))/gim;
+    replacedText = replacedText.replace(replacePattern2, '$1<a href="http://$2" target="_blank">$2</a>');
+
+    //Change email addresses to mailto:: links.
+    replacePattern3 = /(([a-zA-Z0-9\-\_\.])+@[a-zA-Z\_]+?(\.[a-zA-Z]{2,6})+)/gim;
+    replacedText = replacedText.replace(replacePattern3, '<a href="mailto:$1">$1</a>');
+
+    return replacedText;
+}
 
 }
