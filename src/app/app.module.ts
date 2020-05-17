@@ -8,7 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { GoogleChartsModule } from 'angular-google-charts';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SocialLoginModule, AuthServiceConfig } from "angularx-social-login";
-import { GoogleLoginProvider, FacebookLoginProvider } from "angularx-social-login";
+import { GoogleLoginProvider } from "angularx-social-login";
 import { HttpClientModule } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -23,6 +23,7 @@ import {customNotifierOptions} from './notifierconfig';
 import { AboutComponent } from './about/about.component'
 import {MatCardModule} from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
+import { MatCarouselModule } from '@ngmodule/material-carousel';
 
 const socketConfig: SocketIoConfig = { url: environment.nodeChatUrl, options: {} };
 let config = new AuthServiceConfig([
@@ -58,8 +59,8 @@ export function provideConfig() {
     NotifierModule.withConfig(customNotifierOptions),
     SocketIoModule.forRoot(socketConfig),
     MatGridListModule,
-    MatCardModule
-  ],
+    MatCardModule,
+    MatCarouselModule.forRoot()  ],
   providers: [
     {
       provide: AuthServiceConfig,

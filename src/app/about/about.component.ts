@@ -8,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 export class AboutComponent implements OnInit {
 
   constructor() { }
+  breakpoint:string="5:1"
+  images = [944, 1011, 984].map((n) => `https://picsum.photos/id/${n}/900/500`);
 
   ngOnInit(): void {
     console.log("in about")
+  }
+  onResize(event){
+    console.log(event.target.innerWidth )
+    this.breakpoint=(event.target.innerWidth <= 400)? "1:1.4" : "5:1"
   }
 
 }

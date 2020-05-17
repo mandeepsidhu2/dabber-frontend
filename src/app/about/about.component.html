@@ -1,16 +1,43 @@
-<div style="margin-top: 80px;margin-bottom: 10%">
-    <mat-grid-list style="margin: 5%"cols="1" rowHeight="5:1">
-        <mat-grid-tile-header><h2 class="mat-display-1">Manage your progress across platforms</h2></mat-grid-tile-header>
-        <mat-grid-tile>
-            <p class="mat-body mat-body-strong" style="word-spacing: 3px;font-size: medium;">Tabber provides an easy solution for you to manage your progress across 
+<div style="margin-top: 100px;margin-bottom: 10%;margin-left: 5%;width: 80%;" (window:resize)="onResize($event)">
+    <mat-grid-list style=""cols="1" [rowHeight]='breakpoint'>
+        <mat-grid-tile-header><h2 style="margin: 0%" class="mat-display-1">Manage your progress across platforms</h2></mat-grid-tile-header>
+        <mat-grid-tile >
+            <p class="mat-body mat-body-strong" style="word-spacing: 2px;font-size: medium;">
+                Are you feeling a lack of motivation to polish your coding skills, or finding 
+                going over the interview problems quite boring ? It might be the way you are
+                keeping a tab on your progress or the lack of interaction with the developer
+                community who are going through the same phase as you are in your prep.
+                Tabber provides an easy solution for you to manage your progress across 
                 various coding platforms, keep a tab on your friend's or the community's
-                advance each day,interact with others through a built in chatting arena
-                and much more.
+                advance each day,interact with others through a built in chatting arena while 
+                streaming music and much more on a common platform.
             </p>
         </mat-grid-tile>
     </mat-grid-list>
-    <!-- <mat-grid-list cols="2" rowHeight="2:1">
-        <mat-grid-tile>2</mat-grid-tile>
-        <mat-grid-tile>3</mat-grid-tile>
-    </mat-grid-list> -->
+
+    <mat-carousel   timings="250ms ease-in"
+    [autoplay]="true"
+    interval="5000"
+    color="white"
+    maxWidth="auto"
+    proportion="25"
+    slides="5"
+    [loop]="true"
+    [hideArrows]="false"
+    [hideIndicators]="false"
+    [useKeyboard]="true"
+    [useMouseWheel]="false"
+    orientation="ltr">
+            <mat-carousel-slide>
+                <h2>Here is it</h2>
+                 <img src="https://i.picsum.photos/id/237/200/300.jpg">
+            </mat-carousel-slide>
+                  <mat-carousel-slide>
+                        <img src="https://picsum.photos/seed/picsum/200/300">
+                         </mat-carousel-slide>
+                         <mat-carousel-slide>
+                                <img src="https://i.picsum.photos/id/217/200/300.jpg">
+                                 </mat-carousel-slide>
+</mat-carousel>
+   
 </div>
