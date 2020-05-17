@@ -6,6 +6,7 @@ import {AuthenticationService} from "../authentication.service"
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { NotifierService } from "angular-notifier";
 import {DataService} from "../data.service"
+import {FooterComponent} from "../footer/footer.component"
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',

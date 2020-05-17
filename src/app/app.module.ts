@@ -24,7 +24,8 @@ import { AboutComponent } from './about/about.component'
 import {MatCardModule} from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { MatCarouselModule } from '@ngmodule/material-carousel';
-
+import { FooterComponent } from './footer/footer.component';
+import {MatDividerModule} from '@angular/material/divider';
 const socketConfig: SocketIoConfig = { url: environment.nodeChatUrl, options: {} };
 let config = new AuthServiceConfig([
   {
@@ -41,7 +42,8 @@ export function provideConfig() {
     HomepageComponent,
     NavbarComponent,
     InteractiveComponent,
-    AboutComponent
+    AboutComponent,
+    FooterComponent
   ],
   imports: [
     HttpClientModule,
@@ -60,7 +62,8 @@ export function provideConfig() {
     SocketIoModule.forRoot(socketConfig),
     MatGridListModule,
     MatCardModule,
-    MatCarouselModule.forRoot()  ],
+    MatCarouselModule.forRoot(),
+    MatDividerModule  ],
   providers: [
     {
       provide: AuthServiceConfig,

@@ -14,8 +14,20 @@
             </p>
         </mat-grid-tile>
     </mat-grid-list>
-
-    <h2 style="margin: 0%" class="mat-display-1">A slide show of features</h2>
+    <mat-divider style="margin-bottom: 5%"></mat-divider>
+    <mat-grid-list cols="1" [rowHeight]='breakpoint'>
+            <mat-grid-tile-header><h2 style="margin: 0%" class="mat-display-1">Tabber is free !</h2></mat-grid-tile-header>
+            <mat-grid-tile >
+                <p class="mat-body mat-body-strong" style="word-spacing: 2px;font-size: medium;">
+                    Tabber is absolutely free to use and with no ads for the best user experience.We strive
+                    to provide a solution to make learning fun by managing your progress,abling you to communicate
+                    with others who might be dealing with a similar situation. However we incur certain operational
+                    costs, so support us by buying a coffee if you find tabber useful.
+                </p>
+            </mat-grid-tile>
+        </mat-grid-list>
+        <mat-divider style="margin-bottom: 5%"></mat-divider>
+    <h2 style="margin: 0%" class="mat-display-1">Features offered by Tabber</h2>
 
     <mat-carousel   timings="250ms ease-in"
     [autoplay]="true"
