@@ -4,3 +4,6 @@ mat-grid-tile {
   .mat-stepper-horizontal {
     margin-top: 8px;
   }
+  mat-card{
+      margin-bottom: 5%
+  }

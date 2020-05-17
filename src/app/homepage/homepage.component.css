@@ -1,26 +1,13 @@
-.toggle h1{
-  margin: 0px;
-  text-align: center
+
+button{
+  width: 80%;
 }
 
-.toggle{
-
-  display: flex;
-  flex-direction: column;
-  width: 23%;
- 
-}
 .mat-table{
   flex: 0 0 100px !important;
   white-space: unset !important;
 }
-.button-container{
-  display: flex;
-  width: 90%;
-    margin-left: 5%;
-    margin-right: 5%;
-  justify-content: space-around;
-}
+
 .example-container.mat-elevation-z8 {    
   overflow-x: auto;
 }

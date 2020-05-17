@@ -15,7 +15,6 @@ export class AboutComponent implements OnInit {
     console.log("in about")
   }
   onResize(event){
-    console.log(event.target.innerWidth )
     this.breakpoint=(event.target.innerWidth <= 400)? "1:1.4" : "5:1"
   }
 

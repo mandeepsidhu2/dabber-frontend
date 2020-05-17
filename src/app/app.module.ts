@@ -23,9 +23,10 @@ import {customNotifierOptions} from './notifierconfig';
 import { AboutComponent } from './about/about.component'
 import {MatCardModule} from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
-import { MatCarouselModule } from '@ngmodule/material-carousel';
 import { FooterComponent } from './footer/footer.component';
 import {MatDividerModule} from '@angular/material/divider';
+import {MatExpansionModule} from '@angular/material/expansion';
+
 const socketConfig: SocketIoConfig = { url: environment.nodeChatUrl, options: {} };
 let config = new AuthServiceConfig([
   {
@@ -62,8 +63,8 @@ export function provideConfig() {
     SocketIoModule.forRoot(socketConfig),
     MatGridListModule,
     MatCardModule,
-    MatCarouselModule.forRoot(),
-    MatDividerModule  ],
+    MatDividerModule,
+    MatExpansionModule  ],
   providers: [
     {
       provide: AuthServiceConfig,

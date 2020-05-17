@@ -1,10 +1,4 @@
-.button-container{
-    display: flex;
-    width: 90%;
-      margin-left: 5%;
-      margin-right: 5%;
-    justify-content: space-around;
-  }
+
   .example-container.mat-elevation-z8 {    
     overflow-x: auto;
   }
