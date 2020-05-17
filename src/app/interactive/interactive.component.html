@@ -9,7 +9,7 @@
         <span class="col-lg-2 col-4"></span>
     </div>
     <div class="col-lg-6 col-12" (click)="displayWarning()"style="margin-left: 2%;;margin-bottom: 5%;border:1px solid black;position:relative;"class="fixed">
-        <div class="chatHistory" #chathistory [style.max-width]='chatWindowWidth' style="height:87%; overflow:auto;"></div>
+        <div class="chatHistory" #chathistory [style.width]='chatWindowWidth' style="height:87%; overflow:auto;"></div>
         <input *ngIf=loggedIn (keydown)="sendMessage($event)" [(ngModel)]="message" style="width:100%;position: absolute;left:0;bottom:0;" type="text" id="fname" name="fname">
         <div *ngIf=loggedIn style="position: absolute;right:0;bottom:0;">
             <fa-icon  (click)='sendMessage(null)' style="color:green"  class="fa-lg" [icon]="faPaperPlane"></fa-icon>
