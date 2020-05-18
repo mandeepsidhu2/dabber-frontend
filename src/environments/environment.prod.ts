@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  baseUrl:"https://evening-beyond-06490.herokuapp.com",
+  baseUrl:"http://tabber-env.eba-ckk4ny2u.us-east-2.elasticbeanstalk.com",
   nodeChatUrl:"https://sheltered-thicket-34759.herokuapp.com"
 };
