@@ -4,7 +4,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { faPaperPlane } from '@fortawesome/free-regular-svg-icons';
 import { ChatService } from '../chat.service';
 import { NotifierService } from "angular-notifier";
-
+import {DataToInterService} from '../data-to-inter.service'
 @Component({
   selector: 'app-interactive',
   templateUrl: './interactive.component.html',
@@ -14,7 +14,11 @@ export class InteractiveComponent implements OnInit {
   @ViewChild('chathistory') div: ElementRef;
   @Input() name: string;
   userId:any;
-  constructor(private notifierService: NotifierService,private chatService: ChatService,private renderer: Renderer2,private songService:SongService,private sanitizer:DomSanitizer,) { 
+
+  constructor(private dataToInterService:DataToInterService,private notifierService: NotifierService,private chatService: ChatService,private renderer: Renderer2,private songService:SongService,private sanitizer:DomSanitizer,) { 
+    this.dataToInterService.getOldChat$.subscribe(data => {
+      this.signalFromHomepage();
+    })
     this.notifier = notifierService;
   }
   songs:Array<any>=[]
@@ -35,13 +39,13 @@ export class InteractiveComponent implements OnInit {
      return;
     if(this.message==null||this.message=="")
     return
-    this.chatService.addMessageToChatHistory(this.userId,this.name,this.message).subscribe(data=>{console.log(data)})
+    this.chatService.addMessageToChatHistory(this.userId,this.name,this.message).subscribe(data=>{})
     this.chatService.sendMessage([this.name,this.message]);
     this.message = '';
 
   }
-  connection
-  ngOnChanges(){
+  
+  signalFromHomepage(){
     if(localStorage.getItem(btoa("loggedIn"))==btoa("true"))
     this.loggedIn=true;
     document.getElementsByClassName("chatHistory")[0].innerHTML=""
@@ -49,9 +53,9 @@ export class InteractiveComponent implements OnInit {
       this.addOldChat(data);
     })
   }
+  connection
   ngOnInit(): void {
     this.chatWindowWidth=(window.innerWidth<= 400)? "100vw" : "50vw"
-
     this.userId=atob(localStorage.getItem(btoa("userId")))
     this.userId=Number(this.userId)
     if(localStorage.getItem(btoa("loggedIn"))==btoa("true"))
@@ -73,6 +77,7 @@ export class InteractiveComponent implements OnInit {
     })
   }
   addOldChat(chatHistory:any){
+   
     for(let i=0;i<chatHistory.length;i++){
       let data=[]
       data.push(chatHistory[i]['name'])
@@ -81,7 +86,6 @@ export class InteractiveComponent implements OnInit {
     }
   }
   addToChat(data:any){
-
     if(data[0]==this.name)
     data="You: "+data[1];
     else

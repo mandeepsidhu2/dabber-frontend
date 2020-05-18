@@ -4,7 +4,7 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 import { LevelService } from '../level.service';
 import { NotifierService } from "angular-notifier";
 import { DataService } from '../data.service';
-
+import {DataToInterService} from '../data-to-inter.service'
 @Component({
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',
@@ -16,11 +16,14 @@ import { DataService } from '../data.service';
       transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
     ]),
   ],
+  providers:[DataToInterService]
 })
 export class HomepageComponent implements OnInit {
-  constructor(private dataService:DataService,private levelService:LevelService,private notifierService: NotifierService) { 
+  constructor(private dataToInterService:DataToInterService,private dataService:DataService,private levelService:LevelService,private notifierService: NotifierService) { 
     dataService.userData$.subscribe(data=>{ 
         this.initaliseData(true);
+        this.dataToInterService.sendData("true")
+
     });
     //for the live time on screen
     setInterval(() => {

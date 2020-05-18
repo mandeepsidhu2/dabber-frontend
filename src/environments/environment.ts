@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrl:"http://localhost:3000",
+  baseUrl:"http://tabber-env.eba-ckk4ny2u.us-east-2.elasticbeanstalk.com",
   nodeChatUrl:"http://localhost:8080"
 };
 

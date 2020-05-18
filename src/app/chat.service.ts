@@ -13,7 +13,6 @@ export class ChatService {
   constructor(private socket: Socket,private http: HttpClient,private cookieService:CookieService) { }
  
   public sendMessage(message) {
-    console.log("sending to node server "+ message)
     this.socket.emit('new-message', message);
   }
 public  getMessages() {
