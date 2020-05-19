@@ -57,6 +57,8 @@ export class HomepageComponent implements OnInit {
   width = 900;
   height = 350; 
 
+  map= new Map<string,string>();
+ 
   //for mat table
   @ViewChild(MatPaginatorModule, {static: true}) paginator: MatPaginatorModule;
   dataSource:any;
@@ -86,6 +88,10 @@ export class HomepageComponent implements OnInit {
   }
   displayStyle:string="inline"
   ngOnInit(): void {
+    this.map.set("easy","two-wheeler")
+    this.map.set("medium","four-wheeler")
+    this.map.set("difficult","others")
+
     this.displayStyle=(window.innerWidth<= 400)? "block" : "inline"
 
     if(localStorage.getItem(btoa("loggedIn"))==btoa("true"))
@@ -184,7 +190,8 @@ export class HomepageComponent implements OnInit {
   
     //updating database,API hit
     this.userData[level]=this.userData[level]+1
-    this.notifier.notify("success", "Yayy ,your score is "+this.userData[level]+" for level "+level);
+    console.log(level,this.map["easy"],this.map[level])
+    this.notifier.notify("success", "You updated the count for "+this.map.get(level)+" to "+this.userData[level]);
     this.levelService.changeLevel(level,this.userData[level]).subscribe(data=>{
      // console.log(data);
     })
@@ -193,8 +200,6 @@ export class HomepageComponent implements OnInit {
   //decrease the number of problems solved in each category
   decreaseLevels(level:string){
     if(this.userData[level]>0){
-      this.notifier.notify("info", "OOPSSS");
-
     this.userData[level]=this.userData[level]-1
     //to update the table live then hit the api
     let email=this.userData.email
