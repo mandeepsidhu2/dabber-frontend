@@ -1,52 +1,43 @@
 <div style="margin-top: 100px;margin-bottom: 10%;margin-left: 5%;width: 80%;" (window:resize)="onResize($event)">
-    <mat-grid-list style=""cols="1" [rowHeight]='breakpoint'>
-        <mat-grid-tile-header><h2 style="margin: 0%" class="mat-display-1">Manage your progress across platforms</h2></mat-grid-tile-header>
+    <mat-grid-list cols="1" [rowHeight]='breakpoint'>
+        <mat-grid-tile-header><h2 style="margin-bottom: 3%" class="mat-display-1">Manage the traffic into the parking system</h2></mat-grid-tile-header>
         <mat-grid-tile >
             <p class="mat-body mat-body-strong" style="word-spacing: 2px;font-size: medium;">
-                Are you feeling a lack of motivation to polish your coding skills, or finding 
-                going over the interview problems quite boring ? It might be the way you are
-                keeping a tab on your progress or the lack of interaction with the developer
-                community who are going through the same phase as you are in your prep.
-                Tabber provides an easy solution for you to manage your progress across 
-                various coding platforms, keep a tab on your friend's or the community's
-                advance each day,interact with others through a built in chatting arena while 
-                streaming music and much more on a common platform.
+                Tabber is a part of the suvidham ecosystem, to manage and collect data of the
+                various types of vehicles that enter into our parking system.The data is carefully
+                assessed to reallocate or disallocate parking space to a particular kind of vehicle
+                in order to function with the best usage of the space available.This also keeps a record
+                of the number of vehicles processed by each employee and the category of each.<br/>
+                There is a chat communication system for the employees to communicate any kind of issues
+                or tag a concerned employee.The employee identity is managed through google authentication
+                to prevent any untoward updates in the database.Only authenticated employees may communicate<br/>
+                Tabber strives to improve the user experience by improving the efficiency in space and
+                management of the parking system. 
             </p>
         </mat-grid-tile>
     </mat-grid-list>
+   
     <mat-divider style="margin-bottom: 5%"></mat-divider>
-    <mat-grid-list cols="1" [rowHeight]='breakpoint'>
-            <mat-grid-tile-header><h2 style="margin: 0%" class="mat-display-1">Tabber is free !</h2></mat-grid-tile-header>
-            <mat-grid-tile >
-                <p class="mat-body mat-body-strong" style="word-spacing: 2px;font-size: medium;">
-                    Tabber is absolutely free to use and with no ads for the best user experience.We strive
-                    to provide a solution to make learning fun by managing your progress,abling you to communicate
-                    with others who might be dealing with a similar situation. However we incur certain operational
-                    costs, so support us by buying a coffee if you find tabber useful.
-                </p>
-            </mat-grid-tile>
-        </mat-grid-list>
-        <mat-divider style="margin-bottom: 5%"></mat-divider>
     <h2 style="margin-bottom: 5%" class="mat-display-1">Features offered by Tabber</h2>
 
     <mat-card>
         <mat-card-header>
-            <mat-card-title>Check Other's Progress</mat-card-title>
-            <mat-card-subtitle>Search by name or email</mat-card-subtitle>
+            <mat-card-title>Check the stats for an employee</mat-card-title>
+            <mat-card-subtitle>Search by name or email,see stats for previous days</mat-card-subtitle>
         </mat-card-header>
             <img mat-card-image src="../../assets/img1.png">
     </mat-card>
     <mat-card>
         <mat-card-header>
-            <mat-card-title>Update your progress</mat-card-title>
-            <mat-card-subtitle>After updating the concerned level,table is updated</mat-card-subtitle>
+            <mat-card-title>Update the count</mat-card-title>
+            <mat-card-subtitle>Update whenever a new vehicle enters the system</mat-card-subtitle>
         </mat-card-header>
             <img mat-card-image src="../../assets/img2.png">
     </mat-card>
     <mat-card>
         <mat-card-header>
-            <mat-card-title>Stream music and chat with community</mat-card-title>
-            <mat-card-subtitle>Listen to the Tabber tunes at SoundCloud and chat</mat-card-subtitle>
+            <mat-card-title>Chat with other employees</mat-card-title>
+            <mat-card-subtitle>Report issues, or convey important messages</mat-card-subtitle>
         </mat-card-header>
             <img mat-card-image src="../../assets/img3.png">
     </mat-card>
