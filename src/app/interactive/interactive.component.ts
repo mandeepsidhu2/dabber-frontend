@@ -54,7 +54,9 @@ export class InteractiveComponent implements OnInit {
     })
   }
   connection
+  chatHeight='25vw'
   ngOnInit(): void {
+    this.chatHeight=(window.innerWidth<= 400)? "100vw" : "25vw"
     this.chatWindowWidth=(window.innerWidth<= 400)? "80vw" : "80vw"
     this.userId=atob(localStorage.getItem(btoa("userId")))
     this.userId=Number(this.userId)

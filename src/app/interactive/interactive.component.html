@@ -8,7 +8,7 @@
         <span class="col-lg-4 col-2"><button   (click)="nextSong()" type="button" class="btn btn-outline-primary ">Next</button></span>
         <span class="col-lg-2 col-4"></span>
     </div> -->
-    <div class="col-lg-12 col-12" (click)="displayWarning()"style="margin-left: 2%;;margin-bottom: 5%;border:1px solid black;position:relative;height:25vw;"class="fixed">
+    <div class="col-lg-12 col-12" (click)="displayWarning()"style="margin-left: 2%;;margin-bottom: 5%;border:1px solid black;position:relative;" [style.height]="chatHeight"class="fixed">
         <div class="chatHistory" #chathistory [style.width]='chatWindowWidth' style="height:87%; overflow:auto;"></div>
         <input *ngIf=loggedIn (keydown)="sendMessage($event)" [(ngModel)]="message" style="width:100%;position: absolute;left:0;bottom:0;" type="text" id="fname" name="fname">
         <div *ngIf=loggedIn style="position: absolute;right:0;bottom:0;">
