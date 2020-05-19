@@ -28,7 +28,7 @@ export class InteractiveComponent implements OnInit {
   message:any
   loggedIn:boolean=false;
   private readonly notifier: NotifierService;
-  chatWindowWidth='50vw'
+  chatWindowWidth='80vw'
   displayWarning(){
     if(!this.loggedIn)
     this.notifier.notify("error", "Login to chat ! ");
@@ -55,7 +55,7 @@ export class InteractiveComponent implements OnInit {
   }
   connection
   ngOnInit(): void {
-    this.chatWindowWidth=(window.innerWidth<= 400)? "100vw" : "50vw"
+    this.chatWindowWidth=(window.innerWidth<= 400)? "80vw" : "80vw"
     this.userId=atob(localStorage.getItem(btoa("userId")))
     this.userId=Number(this.userId)
     if(localStorage.getItem(btoa("loggedIn"))==btoa("true"))
@@ -87,9 +87,9 @@ export class InteractiveComponent implements OnInit {
   }
   addToChat(data:any){
     if(data[0]==this.name)
-    data="You: "+data[1];
+    data="You:  "+data[1];
     else
-    data=data[0]+": "+data[1];
+    data=data[0]+":  "+data[1];
     const p: HTMLParagraphElement = this.renderer.createElement('p');
     p.innerHTML = String(this.linkify(data));
     this.renderer.appendChild(this.div.nativeElement, p)

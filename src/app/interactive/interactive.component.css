@@ -9,6 +9,9 @@
     height: 200px;
       overflow-y: scroll;
   }
+  .chatHistory{
+    margin-left: 1vw;
+  }
  
   fa-icon{
    cursor: pointer; 

@@ -44,7 +44,7 @@ export class HomepageComponent implements OnInit {
   graphCollect:any=[];
   title = 'Coding Practice Progress';
   type = 'LineChart';
-  columnNames = ["Date","easy", "medium", "difficult"];
+  columnNames = ["Date","two wheelers", "four wheelers", "others"];
   options = {   
      hAxis: {
         title: 'Date'
@@ -54,8 +54,8 @@ export class HomepageComponent implements OnInit {
      },
      colors:["#66ff66","#ffff00","#ff0000"]
   };
-  width = 700;
-  height = 300; 
+  width = 900;
+  height = 350; 
 
   //for mat table
   @ViewChild(MatPaginatorModule, {static: true}) paginator: MatPaginatorModule;
@@ -64,9 +64,14 @@ export class HomepageComponent implements OnInit {
   pageIndexTable:number
   pageSizeTable:number
   ELEMENT_DATA:totalRecord[]=[]
-  columnsToDisplay = ['name', 'easy', 'medium', 'difficult'];
+  columnsToDisplay = ['name', 'Two Wheelers', 'Four Wheelers', 'Others'];
   expandedElement: totalRecord | null;
-
+  removeSpaces(s:string):string{
+    s=s.split(" ").join("")
+    s=s.toLowerCase()
+    
+    return s;
+  }
   initaliseData(loggedInStatus:Boolean){
     this.pageIndexTable=0;
     this.pageSizeTable=5;
@@ -79,8 +84,10 @@ export class HomepageComponent implements OnInit {
       }) 
     }
   }
-
+  displayStyle:string="inline"
   ngOnInit(): void {
+    this.displayStyle=(window.innerWidth<= 400)? "block" : "inline"
+
     if(localStorage.getItem(btoa("loggedIn"))==btoa("true"))
       this.loggedIn=true;
     else
@@ -139,11 +146,11 @@ export class HomepageComponent implements OnInit {
       //setting up the data for mat table
       this.var=data;
       for(let i=0;i<this.var.length;i++){
-        var temp:totalRecord= {name:null,email:null,easy:null,medium:null,difficult:null};
+        var temp:totalRecord= {name:null,email:null,twowheelers:null,fourwheelers:null,others:null};
         temp.name=this.var[i]['name'];
-        temp.easy=this.var[i]['totalEasy'];
-        temp.medium=this.var[i]['totalMedium'];
-        temp.difficult=this.var[i]['totalDifficult'];
+        temp.twowheelers=this.var[i]['totalEasy'];
+        temp.fourwheelers=this.var[i]['totalMedium'];
+        temp.others=this.var[i]['totalDifficult'];
         temp.email=this.var[i]['email']
         this.ELEMENT_DATA.push(temp)
      }
@@ -182,7 +189,7 @@ export class HomepageComponent implements OnInit {
      // console.log(data);
     })
   }
-
+  
   //decrease the number of problems solved in each category
   decreaseLevels(level:string){
     if(this.userData[level]>0){
@@ -211,7 +218,7 @@ export class HomepageComponent implements OnInit {
 export interface totalRecord {
   name: string;
   email: string;
-  difficult: number;
-  easy: number;
-  medium: number;
+  others: number;
+  twowheelers: number;
+  fourwheelers: number;
 }

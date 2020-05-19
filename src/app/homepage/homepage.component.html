@@ -2,19 +2,19 @@
   <notifier-container></notifier-container>
   <div class="row" style="text-align: center;margin-bottom: 5%" >
         <div *ngIf=loggedIn class="col-lg-3 col-4">
-            <h1 style="font-weight:bold;margin: 10px;">Easy</h1>
+            <h1 style="font-weight:bold;margin: 10px;">Two Wheelers</h1>
             <button (click)="increaseLevels('easy',1)" type="button" class="btn btn-outline-success ">+</button>
-            <h1 style="font-weight:bold;margin: 10px;">{{userData?.easy}}</h1>
+            <h1 style="font-weight:bold;margin: 14px;">{{userData?.easy}}</h1>
             <button (click)="decreaseLevels('easy')" type="button" class="btn btn-outline-danger ">-</button>
           </div>
         <div *ngIf=loggedIn class="col-lg-3 col-4">
-            <h1 style="font-weight:bold;margin: 10px;">Medium</h1>
+            <h1 style="font-weight:bold;margin: 10px;">Four Wheelers</h1>
             <button (click)="increaseLevels('medium',2)" type="button" class="btn btn-outline-success ">+</button>
-            <h1  style="font-weight:bold;margin: 10px;">{{userData?.medium}}</h1>
+            <h1  style="font-weight:bold;margin: 14px;">{{userData?.medium}}</h1>
             <button (click)="decreaseLevels('medium')" type="button" class="btn btn-outline-danger ">-</button>
         </div>
         <div *ngIf=loggedIn class="col-lg-3 col-4">
-            <h1 style="font-weight:bold;margin: 10px;">Difficult</h1>
+            <h1 style="font-weight:bold;margin: 14px;font-size: 13px"><span style="font-size: 18px" [style.display]='displayStyle'>Others</span>(Irregular sized)</h1>
             <button (click)="increaseLevels('difficult',3)" type="button" class="btn btn-outline-success ">+</button>
             <h1  style="font-weight:bold;margin: 10px;">{{userData?.difficult}}</h1>
             <button (click)="decreaseLevels('difficult')"  type="button" class="btn btn-outline-danger ">-</button>
@@ -28,10 +28,10 @@
   <mat-expansion-panel style="width: 96%;margin-left: 2%;">
       <mat-expansion-panel-header>
         <mat-panel-title>
-          Stream and Chat
+          Team communication
         </mat-panel-title>
         <mat-panel-description>
-          Let the tunes lose,also got questions ? Go chat !
+          Report any urgent situation here
         </mat-panel-description>
       </mat-expansion-panel-header>
     
@@ -39,7 +39,7 @@
     
     </mat-expansion-panel>
 
-<h2 style="margin:2%" class="mat-display-1">User Table</h2>
+<h2 style="margin:2%" class="mat-display-1">Employees Log Table</h2>
 <div class="example-container" style="overflow-x:auto;" >
     <mat-form-field (keydown)="keyDownFunction($event)" class="example-full-width">
         <mat-label>Enter name or email</mat-label>
@@ -50,7 +50,7 @@
     <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
       <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
         <th style="text-align: center" mat-header-cell *matHeaderCellDef> {{column}} </th>
-        <td style="text-align: center" mat-cell *matCellDef="let element"> {{element[column]}} </td>
+        <td style="text-align: center" mat-cell *matCellDef="let element"> {{element[removeSpaces(column)]}} </td>
       </ng-container>
 
       <ng-container matColumnDef="expandedDetail">
