@@ -50,7 +50,7 @@ export class HomepageComponent implements OnInit {
         title: 'Date'
      },
      vAxis:{
-        title: 'Problems Solved'
+        title: 'Vehicles counted'
      },
      colors:["#66ff66","#ffff00","#ff0000"]
   };
