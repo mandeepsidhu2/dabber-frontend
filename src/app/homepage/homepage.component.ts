@@ -42,7 +42,7 @@ export class HomepageComponent implements OnInit {
   //for google line chart
   var:Array<any>;
   graphCollect:any=[];
-  title = 'Coding Practice Progress';
+  title = 'Vehicle Data';
   type = 'LineChart';
   columnNames = ["Date","two wheelers", "four wheelers", "others"];
   options = {   
