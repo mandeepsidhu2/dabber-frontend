@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomepageComponent } from './homepage/homepage.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AboutComponent } from './about/about.component';
+import { AiComponent } from './ai/ai.component';
 
 
 const routes: Routes = [
@@ -22,6 +23,10 @@ const routes: Routes = [
 {
   path: 'about',
   component: AboutComponent
+},
+{
+  path: 'ai',
+  component: AiComponent
 }
 ]
 }];

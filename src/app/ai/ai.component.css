@@ -1,0 +1,9 @@
+mat-grid-tile {
+    background: rgb(255, 255, 255);
+  }
+  .mat-stepper-horizontal {
+    margin-top: 8px;
+  }
+  mat-card{
+      margin-bottom: 5%
+  }

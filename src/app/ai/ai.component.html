@@ -1,0 +1,57 @@
+<div style="margin-top: 100px;margin-bottom: 10%;margin-left: 5%;width: 80%;" (window:resize)="onResize($event)">
+    <a target="_blank" href="https://morning-plateau-15330.herokuapp.com"><button style="margin: 5%" type="button"  class="btn btn-outline-success">Checkout Face-AI</button></a>          
+    <mat-grid-list cols="1" style="margin-bottom: 3%" [rowHeight]='breakpoint'>
+        <mat-grid-tile-header><h2 style="margin-bottom: 3%" class="mat-display-1">Usage of Face-AI</h2></mat-grid-tile-header>
+        <mat-grid-tile >
+            <p class="mat-body mat-body-strong" style="word-spacing: 2px;font-size: medium;">
+               Face-AI will help the user to enter into the parking system, without scanning their RF card.
+               We will do so by mapping the RF id number against each user, and by using either of them, i.e RF card 
+               or face recognition, the user can be authorised and therefore charged.In case of the latter, the balance will be automatically 
+                charged on the card.<br/>
+                This is a working prototype of the face recognition of a user and how it may be used to implement the features
+                described above.By having a photograph of the user previously with ourselves, we can recognise the user face
+                with cameras installed in the parking system, more the number of reference images we have of the user, higher 
+                is the probability of the AI to correctly detect the user face.<br/>
+                In case the user has apprehensions regarding us having their photograph through the suvidham platform or 
+                otherwise, they may continue to use the RF id card.            
+            </p>
+        </mat-grid-tile>
+        
+    </mat-grid-list>
+
+    <mat-grid-list cols="1" [rowHeight]='breakpoint'>
+        <mat-grid-tile-header><h2 style="margin: 0%" class="mat-display-1">How does it work ? </h2></mat-grid-tile-header>
+        <mat-grid-tile >
+            <p class="mat-body mat-body-strong" style="word-spacing: 2px;font-size: medium;">
+              For each of the persons listed, we have their two images.More the number of images of an individual
+              , better are the chances to correctly recognise their face. The number next to the face of the person represents
+              how sure the AI is about correctly recognising it, where 1 represents that it is completely sure.<br/>
+              The face recognition library used can be checked out <a href="https://github.com/justadudewhohacks/face-api.js" target="_blank">here.</a>     
+            </p>
+        </mat-grid-tile>
+        
+    </mat-grid-list>
+   
+    <mat-divider style="margin-bottom: 5%"></mat-divider>
+    <h2 style="margin-bottom: 5%" class="mat-display-1">Using Face-AI by Tabber</h2>
+
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Chose an image from the persons listed</mat-card-title>
+        </mat-card-header>
+            <img mat-card-image src="../../assets/img4.png">
+    </mat-card>
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>After uploading, AI recognises the faces</mat-card-title>
+        </mat-card-header>
+            <img mat-card-image src="../../assets/img5.png">
+    </mat-card>
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Another example</mat-card-title>
+        </mat-card-header>
+            <img mat-card-image src="../../assets/img6.png">
+    </mat-card>
+    <a target="_blank" href="https://morning-plateau-15330.herokuapp.com"><button style="margin: 5%" type="button"  class="btn btn-outline-success">Checkout Face-AI</button></a>          
+</div>
