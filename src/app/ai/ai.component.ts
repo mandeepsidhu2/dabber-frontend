@@ -10,11 +10,13 @@ export class AiComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-  }
-  breakpoint:string="5:1"
+    this.breakpoint1=(window.innerWidth <= 400)? "1:1.9" : "5:1"
+    this.breakpoint2=(window.innerWidth <= 400)? "1:1" : "5:1"
 
-  onResize(event){
-    this.breakpoint=(event.target.innerWidth <= 400)? "1:1.4" : "5:1"
   }
+  breakpoint1:string="5:1"
+  breakpoint2:string="5:1"
+
+
 
 }

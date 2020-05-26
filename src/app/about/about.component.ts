@@ -13,9 +13,9 @@ export class AboutComponent implements OnInit {
 
   ngOnInit(): void {
     console.log("in about")
+    this.breakpoint=(window.innerWidth <= 400)? "1:1.8" : "5:1"
+
   }
-  onResize(event){
-    this.breakpoint=(event.target.innerWidth <= 400)? "1:1.4" : "5:1"
-  }
+  
 
 }
