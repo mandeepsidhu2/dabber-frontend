@@ -70,8 +70,12 @@ export class HomepageComponent implements OnInit {
   expandedElement: totalRecord | null;
   removeSpaces(s:string):string{
     s=s.split(" ").join("")
-    s=s.toLowerCase()
-    
+    s=s.toLowerCase() 
+    return s;
+  }
+  removeDashes(s:string):string{
+    s=s.split("-").join("")
+    s=s.toLowerCase() 
     return s;
   }
   initaliseData(loggedInStatus:Boolean){
@@ -88,8 +92,8 @@ export class HomepageComponent implements OnInit {
   }
   displayStyle:string="inline"
   ngOnInit(): void {
-    this.map.set("easy","two-wheeler")
-    this.map.set("medium","four-wheeler")
+    this.map.set("easy","two-wheelers")
+    this.map.set("medium","four-wheelers")
     this.map.set("difficult","others")
 
     this.displayStyle=(window.innerWidth<= 400)? "block" : "inline"
@@ -182,17 +186,20 @@ export class HomepageComponent implements OnInit {
 
     //to update the table live then hit the api
     let email=this.userData.email
+    let original=level
+    //convert easy to two-wheeler to twowheeler
+    level=this.map.get(level)
+    level=this.removeDashes(String(level))
     this.dataSource.filter(function(item){
-       if(item["email"]==email){
+      if(item["email"]==email){
         item[level]+=1;
     }})
     //code for live update ends
   
     //updating database,API hit
-    this.userData[level]=this.userData[level]+1
-    console.log(level,this.map["easy"],this.map[level])
-    this.notifier.notify("success", "You updated the count for "+this.map.get(level)+" to "+this.userData[level]);
-    this.levelService.changeLevel(level,this.userData[level]).subscribe(data=>{
+    this.userData[original]=this.userData[original]+1
+    this.notifier.notify("success", "You updated the count for "+this.map.get(original)+" to "+this.userData[original]);
+    this.levelService.changeLevel(original,this.userData[original]).subscribe(data=>{
      // console.log(data);
     })
   }
@@ -203,6 +210,10 @@ export class HomepageComponent implements OnInit {
     this.userData[level]=this.userData[level]-1
     //to update the table live then hit the api
     let email=this.userData.email
+    let original=level
+      //convert easy to two-wheeler to twowheeler
+    level=this.map.get(level)
+    level=this.removeDashes(String(level))
     this.dataSource.filter(function(item){
        if(item["email"]==email){
         item[level]-=1;
@@ -210,7 +221,7 @@ export class HomepageComponent implements OnInit {
     //code for live update ends
 
      //updating database,API hit
-     this.levelService.changeLevel(level,this.userData[level]).subscribe(data=>{
+     this.levelService.changeLevel(original,this.userData[original]).subscribe(data=>{
       //console.log(data);
     })
 
