@@ -48,5 +48,12 @@ export class NavbarComponent implements OnInit {
     localStorage.setItem(btoa("loggedIn"),btoa("false"))
     window.location.reload();
   }
-
+  deleteAccount(){
+    console.log(this.user.email)
+    this.authenticationService.delete_user(this.user.email).subscribe(data=>console.log(data))
+    this.authService.signOut();
+    this.authenticationService.logout();
+    localStorage.setItem(btoa("loggedIn"),btoa("false"))
+    window.location.reload();
+  }
 }

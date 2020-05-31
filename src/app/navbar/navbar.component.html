@@ -12,6 +12,14 @@
         <li class="nav-item active">
             <a class="nav-link" routerLink="/about"  routerLinkActive="active">About <span class="sr-only">(current)</span></a>
           </li>
+          <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Settings
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a (click)="deleteAccount()" class="dropdown-item">Delete Account</a>
+              </div>
+            </li>
           <li  class="nav-item active">
               <a target="_blank" href="https://www.buymeacoffee.com/tabber/"><img src="../../assets/bmc-button.png"></a>                
          </li> 
