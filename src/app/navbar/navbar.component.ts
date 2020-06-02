@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Inject } from '@angular/core';
 import { AuthService } from "angularx-social-login";
 import { GoogleLoginProvider } from "angularx-social-login";
 import { SocialUser } from "angularx-social-login";
@@ -6,7 +6,7 @@ import {AuthenticationService} from "../authentication.service"
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { NotifierService } from "angular-notifier";
 import {DataService} from "../data.service"
-import {FooterComponent} from "../footer/footer.component"
+import {MatDialog, MatDialogRef,MAT_DIALOG_DATA} from '@angular/material/dialog';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -19,10 +19,18 @@ export class NavbarComponent implements OnInit {
    faGoogle=faGoogle;
    public isCollapsed = true;
    private readonly notifier: NotifierService;
-  constructor(private dataService:DataService,notifierService: NotifierService,private authenticationService:AuthenticationService,private socialAuthService: AuthService,private authService: AuthService) { 
+  constructor(public dialog: MatDialog,private dataService:DataService,notifierService: NotifierService,private authenticationService:AuthenticationService,private authService: AuthService) { 
       this.notifier = notifierService;
   }
-
+  openDialog(): void {
+    const dialogRef = this.dialog.open(DialogOverview,{
+      width: (window.innerWidth <= 400)? "100%" : "40%",
+      data:{email:this.user.email}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
   ngOnInit(): void {
     this.authService.authState.subscribe((user) => {
       this.user = user;
@@ -48,12 +56,30 @@ export class NavbarComponent implements OnInit {
     localStorage.setItem(btoa("loggedIn"),btoa("false"))
     window.location.reload();
   }
-  deleteAccount(){
-    console.log(this.user.email)
-    this.authenticationService.delete_user(this.user.email).subscribe(data=>console.log(data))
+}
+
+
+@Component({
+  selector: 'dialog-overview',
+  templateUrl: 'dialog-overview.html',
+})
+export class DialogOverview {
+  email:string 
+  constructor(
+    public dialogRef: MatDialogRef<DialogOverview>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private authenticationService:AuthenticationService,private authService: AuthService) {
+      this.email=data.email
+    }
+  onYesClick():void{
+    this.authenticationService.delete_user(this.email).subscribe(data=>console.log(data))
     this.authService.signOut();
     this.authenticationService.logout();
     localStorage.setItem(btoa("loggedIn"),btoa("false"))
     window.location.reload();
   }
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
 }

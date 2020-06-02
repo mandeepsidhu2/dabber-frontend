@@ -26,6 +26,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import { FooterComponent } from './footer/footer.component';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatDialogModule} from '@angular/material/dialog';
 
 const socketConfig: SocketIoConfig = { url: environment.nodeChatUrl, options: {} };
 let config = new AuthServiceConfig([
@@ -64,7 +65,8 @@ export function provideConfig() {
     MatGridListModule,
     MatCardModule,
     MatDividerModule,
-    MatExpansionModule  ],
+    MatExpansionModule,
+    MatDialogModule  ],
   providers: [
     {
       provide: AuthServiceConfig,
