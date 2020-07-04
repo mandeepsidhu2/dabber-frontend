@@ -1,0 +1,18 @@
+.example-card {
+    max-width: 80%;
+  }
+mat-card{
+    margin-left: 10%;
+    margin-top: 3%;
+}
+  
+.example-header-image {
+background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+background-size: cover;
+}
+fa-icon{
+    cursor: pointer; 
+}
+fa-icon:hover{ 
+    font-size: 3em; transition: 0.1s ease-out;
+  }

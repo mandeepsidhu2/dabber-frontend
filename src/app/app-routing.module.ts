@@ -22,9 +22,14 @@ const routes: Routes = [
 {
   path: 'about',
   component: AboutComponent
+},
+{ 
+  path: 'posts',
+  loadChildren: () => import('./posts/posts.module').then(m => m.PostsModule) 
 }
 ]
-}];
+}
+  ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
