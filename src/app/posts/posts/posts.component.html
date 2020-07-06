@@ -1,11 +1,17 @@
 <div style="margin-top: 80px;height: 80%">
     <div>
+        <div style="margin-left: 3%;margin-right:45%;  display: flex;justify-content:space-between;"class="top-bar">
+            <button type="button"class="btn btn-outline-primary">Create Post</button>
+            <h1 style="font-family:'Courier New', Courier, monospace;font-size: 2.5em">Post Trends</h1>
+        </div>
         <mat-card class="example-card">
             <mat-card-header>
             <div mat-card-avatar class="example-header-image"></div>
             <mat-card-title>Shiba Inu</mat-card-title>
             <mat-card-subtitle>Dog Breed</mat-card-subtitle>
             </mat-card-header>
+            <mat-card-title>Shiba Inu</mat-card-title>
+
             <mat-card-content>
             <p>
                 The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
@@ -14,12 +20,13 @@
             </p>
             </mat-card-content>
             <mat-card-actions>
-                <fa-icon (click)="openSnackBar()" style="color: black"class="fa-2x" [icon]="faShieldAlt"></fa-icon>
+                <fa-icon (click)="openSnackBar()" class="fa-2x" [icon]="faHandPaper"></fa-icon>
+                <fa-icon (click)="openSnackBar()" class="fa-2x" [icon]="faHandRock"></fa-icon>
+
             </mat-card-actions>
         </mat-card>
         <mat-card class="example-card">
                 <mat-card-header>
-                <div mat-card-avatar class="example-header-image"></div>
                 <mat-card-title>Shiba Inu</mat-card-title>
                 <mat-card-subtitle>Dog Breed</mat-card-subtitle>
                 </mat-card-header>

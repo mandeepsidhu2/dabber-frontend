@@ -12,7 +12,8 @@ background-size: cover;
 }
 fa-icon{
     cursor: pointer; 
+    font-size: 1.5em
 }
 fa-icon:hover{ 
-    font-size: 3em; transition: 0.1s ease-out;
+    font-size: 2em; transition: 0.1s ease-out;
   }

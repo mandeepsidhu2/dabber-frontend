@@ -17,6 +17,7 @@ export class LevelService {
     let tableData={pageIndex:null,pageSize:null,emailInitials:null};
     tableData.pageIndex=pageIndex;tableData.pageSize=pageSize;tableData.emailInitials=emailInitials;
     this.endpoint=this.baseUrl+'/api/v1/filter_all';
+    console.log(atob(this.cookieService.get('token')));
     let headers=new HttpHeaders().set('token',atob(this.cookieService.get('token')));
     headers.set('Content-Type','application/json').set('Accept','application/json');
     return this.http.post<any>(this.endpoint,tableData,{headers});

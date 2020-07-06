@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faShieldAlt } from '@fortawesome/free-solid-svg-icons';
+import { faShieldAlt,faHandPaper,faHandRock } from '@fortawesome/free-solid-svg-icons';
 import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
@@ -17,6 +17,8 @@ export class PostsComponent implements OnInit {
     });
   }
   faShieldAlt=faShieldAlt;
+  faHandPaper=faHandPaper;
+  faHandRock=faHandRock;
   ngOnInit(): void {
   }
 
@@ -24,7 +26,11 @@ export class PostsComponent implements OnInit {
 
 @Component({
   selector: 'tabbed-snackbar',
-  templateUrl: 'tabbed-snackbar.html',
+  template: `
+  <span class="post-tab">
+       Post Tabbed! 🍕
+  </span>
+  `,
   styles: [`
   .post-tab {
     color: hotpink;
