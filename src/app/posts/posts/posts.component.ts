@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { faShieldAlt,faHandPaper,faHandRock } from '@fortawesome/free-solid-svg-icons';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-posts',
@@ -19,10 +20,20 @@ export class PostsComponent implements OnInit {
   faShieldAlt=faShieldAlt;
   faHandPaper=faHandPaper;
   faHandRock=faHandRock;
+  writingPost:Boolean=false;
   ngOnInit(): void {
   }
+  createPost(){
 
+  }
+  writePost(){
+    this.writingPost=true;
+  }
+  cancelWritePost(){
+    this.writingPost=false;
+  }
 }
+
 
 @Component({
   selector: 'tabbed-snackbar',

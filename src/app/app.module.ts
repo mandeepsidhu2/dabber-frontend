@@ -15,7 +15,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { InteractiveComponent } from './interactive/interactive.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatInputModule} from '@angular/material/input';
-import { FormsModule } from '@angular/forms';
+import { FormsModule , ReactiveFormsModule} from '@angular/forms';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { environment } from 'src/environments/environment';
 import { NotifierModule } from "angular-notifier";
@@ -66,7 +66,8 @@ export function provideConfig() {
     MatCardModule,
     MatDividerModule,
     MatExpansionModule,
-    MatDialogModule  ],
+    MatDialogModule,
+    ReactiveFormsModule  ],
   providers: [
     {
       provide: AuthServiceConfig,

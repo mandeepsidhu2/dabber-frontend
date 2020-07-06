@@ -1,8 +1,22 @@
 <div style="margin-top: 80px;height: 80%">
     <div>
         <div style="margin-left: 3%;margin-right:45%;  display: flex;justify-content:space-between;"class="top-bar">
-            <button type="button"class="btn btn-outline-primary">Create Post</button>
+            <button (click)="writePost()"type="button"class="btn btn-outline-primary">Create Post</button>
             <h1 style="font-family:'Courier New', Courier, monospace;font-size: 2.5em">Post Trends</h1>
+        </div>
+        <div *ngIf="writingPost" style="display: flex;flex-direction: column;width: 80%;margin-left: 10%;margin-top: 3%;"class="post-form">
+            <mat-form-field appearance="fill">
+                <mat-label>Title</mat-label>
+                <input matInput>
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+                <mat-label>Content</mat-label>
+                <textarea matInput></textarea>
+            </mat-form-field>
+            <div style="display: flex; justify-content:space-evenly;">
+                <button (click)="cancelWritePost()" style="width:15%"type="button"class="btn btn-outline-danger">Cancel</button>
+                <button (click)="createPost()" style="width:15%"type="button"class="btn btn-outline-primary">Post</button>
+            </div>
         </div>
         <mat-card class="example-card">
             <mat-card-header>

@@ -6,6 +6,9 @@ import { PostsComponent } from './posts/posts.component';
 import {MatCardModule} from '@angular/material/card';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [PostsComponent],
@@ -14,7 +17,10 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     PostsRoutingModule,
     MatCardModule,
     FontAwesomeModule,
-    MatSnackBarModule
-  ]
+    MatSnackBarModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    MatInputModule
+    ]
 })
 export class PostsModule { }
