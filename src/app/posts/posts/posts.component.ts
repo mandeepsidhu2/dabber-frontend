@@ -30,11 +30,26 @@ export class PostsComponent implements OnInit {
   posts:Array<any>;
   postTitle= new FormControl();
   postContent= new FormControl();
+  connection
   ngOnInit(): void {
     this.postService.getPosts().subscribe(posts=>{
       this.posts=posts;
       console.log(this.posts)
     })
+    this.connection=this.postService.getPostsRealTime().subscribe(
+      data=>{
+        let post={
+          title:data[0].title,
+          content:data[0].content,
+          username:data[1].name,
+          picture_url:data[1].photoUrl
+        }
+        this.posts.unshift(post)
+      }
+      )
+  }
+  ngOnDestroy() {
+    this.connection.unsubscribe();
   }
   createPost(){
     let post={
@@ -45,7 +60,7 @@ export class PostsComponent implements OnInit {
       this.writingPost=false;
       this.notifierService.notify("success","Post Created !")
     })
-    this.postService.sendPost("ojoj");
+    this.postService.sendPost([post,JSON.parse(localStorage.getItem('user'))]);
   }
   writePost(){
     this.writingPost=true;

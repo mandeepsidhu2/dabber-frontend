@@ -43,6 +43,8 @@ export class NavbarComponent implements OnInit {
       (userData) => {
         this.authenticationService.login(userData.idToken).subscribe(data=>{
          this.loggedIn=true
+         localStorage.setItem('user',JSON.stringify(userData))
+         console.log(JSON.parse(localStorage.getItem('user')))
          localStorage.setItem(btoa("loggedIn"),btoa("true"))
          this.dataService.sendData("sending signal to homepage for login ...");
          this.notifier.notify("success", "Signed In, Welcome to TABBER");
