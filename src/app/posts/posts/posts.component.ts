@@ -31,7 +31,10 @@ export class PostsComponent implements OnInit {
   postTitle= new FormControl();
   postContent= new FormControl();
   ngOnInit(): void {
-    this.postService.getPosts().subscribe(posts=>this.posts=posts)
+    this.postService.getPosts().subscribe(posts=>{
+      this.posts=posts;
+      console.log(this.posts)
+    })
   }
   createPost(){
     let post={
