@@ -30,8 +30,9 @@
                     <mat-card-content>
                     <p>{{post.content}} </p>
                     </mat-card-content>
-                    <mat-card-actions>
-                            <fa-icon (click)="openSnackBar()" style="color: black"class="fa-2x" [icon]="faShieldAlt"></fa-icon>
+                    <mat-card-actions style="display: flex;justify-content: space-around;width:10% ">
+                            <fa-icon (click)="openSnackBar(post)" [ngStyle]="{'color': (post.is_liked) ? 'blue' : 'black'}"class="fa-2x" [icon]="faShieldAlt"></fa-icon>
+                            <h4 style="font-style: italic">{{post.likes}} TABS</h4>
                     </mat-card-actions>
             </mat-card>
         </span>
