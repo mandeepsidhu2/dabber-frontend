@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { faShieldAlt,faHandPaper,faHandRock } from '@fortawesome/free-solid-svg-icons';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { FormControl, Validators } from '@angular/forms';
+import { PostService } from '../post.service';
+import { NotifierService } from 'angular-notifier';
 
 @Component({
   selector: 'app-posts',
@@ -11,7 +13,11 @@ import { FormControl, Validators } from '@angular/forms';
 export class PostsComponent implements OnInit {
 
   durationInSeconds = 5;
-  constructor(private _snackBar: MatSnackBar) {}
+  private readonly notifier: NotifierService;
+  constructor(private notifierService: NotifierService,private _snackBar: MatSnackBar,private postService:PostService) 
+  {
+    this.notifier = notifierService;
+  }
   openSnackBar() {
     this._snackBar.openFromComponent(TabbedSnackbar, {
       duration: this.durationInSeconds * 1000,
@@ -21,10 +27,22 @@ export class PostsComponent implements OnInit {
   faHandPaper=faHandPaper;
   faHandRock=faHandRock;
   writingPost:Boolean=false;
+  posts:Array<any>;
+  postTitle= new FormControl();
+  postContent= new FormControl();
   ngOnInit(): void {
+    this.postService.getPosts().subscribe(posts=>this.posts=posts)
   }
   createPost(){
-
+    let post={
+      "title":this.postTitle.value,
+      "content":this.postContent.value
+    }
+    this.postService.createPost(post).subscribe(data=>{
+      this.writingPost=false;
+      this.notifierService.notify("success","Post Created !")
+    })
+    this.postService.sendPost("ojoj");
   }
   writePost(){
     this.writingPost=true;

@@ -1,3 +1,4 @@
+<notifier-container></notifier-container>
 <div style="margin-top: 80px;height: 80%">
     <div>
         <div style="margin-left: 3%;margin-right:45%;  display: flex;justify-content:space-between;"class="top-bar">
@@ -7,11 +8,11 @@
         <div *ngIf="writingPost" style="display: flex;flex-direction: column;width: 80%;margin-left: 10%;margin-top: 3%;"class="post-form">
             <mat-form-field appearance="fill">
                 <mat-label>Title</mat-label>
-                <input matInput>
+                <input [formControl]="postTitle" matInput>
             </mat-form-field>
             <mat-form-field appearance="fill">
                 <mat-label>Content</mat-label>
-                <textarea matInput></textarea>
+                <textarea [formControl]="postContent" matInput></textarea>
             </mat-form-field>
             <div style="display: flex; justify-content:space-evenly;">
                 <button (click)="cancelWritePost()" style="width:15%"type="button"class="btn btn-outline-danger">Cancel</button>
